@@ -6,7 +6,9 @@ target 'ABA Music' do
   use_frameworks!
 
   # Pods for ABA Music
+  pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'AlamofireObjectMapper'
   pod 'CollectionViewSlantedLayout'
   pod 'PureLayout'
   pod 'SwiftyJSON', '~> 4.0'
