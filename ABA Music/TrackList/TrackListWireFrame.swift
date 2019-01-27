@@ -11,7 +11,8 @@ import UIKit
 class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
     
     weak var rootNavController: UINavigationController!
-    
+    weak var popover: UIPopoverPresentationController!
+
     func createTrackListModule() -> UIViewController {
         
         self.rootNavController = (UIStoryboard.mainStoryboard.viewController(for: .trackList) as! UINavigationController)
@@ -33,34 +34,35 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
 
     }
 
-    func presentTrackDetailModule(track: Track, from: UIView) {
+    func presentTrackDetailModule(track: Track) {
         
-        // TODO: Inject this wireframe? So we can control how to return?
         let trackDetailView = TrackDetailWireFrame().createTrackDetailModule(for: track)
-//        self.rootNavController.pushViewController(trackDetailView, animated: true)
-    
-    
+        
         // set the presentation style
         trackDetailView.modalPresentationStyle = UIModalPresentationStyle.popover
 
-        trackDetailView.preferredContentSize = CGSize(width: 300, height: 300)
+        trackDetailView.preferredContentSize = CGSize(width: 300, height: 350)
 
         // set up the popover presentation controller
-        trackDetailView.popoverPresentationController?.permittedArrowDirections = [.down]
+        trackDetailView.popoverPresentationController?.permittedArrowDirections = []
         trackDetailView.popoverPresentationController?.delegate = self
-        trackDetailView.popoverPresentationController?.sourceView = from
+        trackDetailView.popoverPresentationController?.sourceView = rootNavController.view
         trackDetailView.popoverPresentationController?.sourceRect = rootNavController.view.bounds
-
+        
         // present the popover
         rootNavController.present(trackDetailView, animated: true, completion: nil)
-    
     }
 }
 
 extension TrackListWireFrame:  UIPopoverPresentationControllerDelegate {
  
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        // return UIModalPresentationStyle.FullScreen
+
         return UIModalPresentationStyle.none
+    }
+    
+    func popoverPresentationController(_ popoverPresentationController: UIPopoverPresentationController, willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>, in view: AutoreleasingUnsafeMutablePointer<UIView>) {
+        
+        rootNavController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }

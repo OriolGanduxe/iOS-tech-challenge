@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import ObjectMapper
+import ObjectMapper // TODO
 
 public class TrackEntity: NSManagedObject {
 
@@ -22,23 +22,3 @@ extension TrackEntity {
         }
     }
 }
-
-// TODO
-//extension TrackEntity: Mappable {
-//
-//    public func mapping(map: Map) {
-//
-//
-//
-////    @NSManaged public var trackId: Int32        @NSManaged public var artistName: String?
-////        @NSManaged public var trackName: String?
-////        @NSManaged public var previewUrl: String?
-////        @NSManaged public var artworkUrl100: String?
-////        @NSManaged public var primaryGenreName: String?
-////        @NSManaged public var country: String?
-////        @NSManaged public var releaseDate: NSDate?
-//
-//    }
-//
-//
-//}

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ArtistTableViewCellDelegate {
-    func didPressTrack(_ track: Track, from: UIView)
+    func didPressTrack(_ track: Track)
 }
 
 class ArtistTableViewCell: UITableViewCell {
@@ -22,8 +22,8 @@ class ArtistTableViewCell: UITableViewCell {
 
 extension ArtistTableViewCell: TrackCollectionViewCellDelegate {
     
-    func didPressTrack(_ track: Track, from: UIView) {
-        delegate?.didPressTrack(track, from: from)
+    func didPressTrack(_ track: Track) {
+        delegate?.didPressTrack(track)
     }
 }
 
@@ -42,4 +42,8 @@ extension ArtistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.delegate = self
         return cell
     }
+    
+
+    
+//    shouldInvalidateLayoutForBoundsChange
 }

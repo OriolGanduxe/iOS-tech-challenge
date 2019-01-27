@@ -16,12 +16,22 @@ class TrackListViewController: UIViewController {
     var artists: [Artist] = []
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var feedbackLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "ABA Music"
 
+        showEmpty()
         setupSearchBar()        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // When the app starts, we want it to be come first responder
+        navigationItem.searchController?.searchBar.becomeFirstResponder()
     }
     
     private func setupSearchBar() {
@@ -31,39 +41,10 @@ class TrackListViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Artists"
         searchController.searchBar.delegate = self
-        searchController.searchBar.text = "Jackson"
         searchController.searchBar.isHidden = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return artists.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "artistCell", for: indexPath) as! ArtistCollectionViewCell
-//        cell.artist = artists[indexPath.item]
-//        cell.delegate = self
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: collectionView.frame.width, height: 180)
-//    }
-//
-//    func didPressTrack(_ track: Track) {
-//        let trackViewController = TrackDetailViewController(track: track)
-//        navigationController?.pushViewController(trackViewController, animated: true)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
 }
 
 extension TrackListViewController: UISearchResultsUpdating, UISearchBarDelegate {
@@ -79,30 +60,55 @@ extension TrackListViewController: UISearchResultsUpdating, UISearchBarDelegate 
 
 extension TrackListViewController: TrackListViewProtocol {
     
+    func showEmpty() {
+        self.feedbackLabel.isHidden = false
+        self.feedbackLabel.text = "Search your favourite artists!"
+        self.spinner.isHidden = true
+        self.spinner.stopAnimating()
+        
+        self.artists = []
+        self.tableView.reloadData()
+    }
+    
     func showArtistTracks(artists: [Artist]) {
+        
+        self.feedbackLabel.isHidden = true
+        self.spinner.isHidden = true
+        self.spinner.stopAnimating()
+        
         self.artists = artists
         self.tableView.reloadData();
     }
     
     func showError(_ error: Error) {
-        // TODO
+
+
+        // For now I have this dummy logic, but we could have strings in the error enum
+        // even localising them
+        if let error = error as? ArtistsError, error == .emptyArtists {
+            self.feedbackLabel.text = "Sorry, we couldn't find any artist with this name"
+        } else {
+            self.feedbackLabel.text = "Something went wrong, try again later"
+        }
+        
+        self.feedbackLabel.isHidden = false
+        self.spinner.isHidden = true
+        self.spinner.stopAnimating()
+        
+        self.artists = []
+        self.tableView.reloadData()
     }
     
     func loading(enabled: Bool) {
-        // TODO
+        
+        self.feedbackLabel.isHidden = false
+        self.feedbackLabel.text = "Loading.."
+        self.spinner.isHidden = false
+        self.spinner.startAnimating()
+        
+        self.artists = []
+        self.tableView.reloadData()
     }
-
-//    func showError() {
-//        HUD.flash(.label("Internet not connected"), delay: 2.0)
-//    }
-//
-//    func showLoading() {
-//        HUD.show(.progress)
-//    }
-//
-//    func hideLoading() {
-//        HUD.hide()
-//    }
 }
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -124,11 +130,15 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        navigationItem.searchController?.searchBar.resignFirstResponder()
+    }
 }
 
 extension TrackListViewController: ArtistTableViewCellDelegate {
     
-    func didPressTrack(_ track: Track, from: UIView) {
-        presenter.showTrackDetail(for: track, from: from)
+    func didPressTrack(_ track: Track) {
+        presenter.showTrackDetail(for: track)
     }
 }

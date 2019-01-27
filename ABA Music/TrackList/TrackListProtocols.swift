@@ -17,7 +17,8 @@ typealias FetchArtistsResults = (Result<[Artist]>) -> Void
 
 protocol TrackListViewProtocol: class {
     var presenter: TrackListPresenterProtocol! { get set }
-    
+
+    func showEmpty()
     func showArtistTracks(artists: [Artist])
     func showError(_ error: Error)
     func loading(enabled: Bool)
@@ -28,7 +29,7 @@ protocol TrackListPresenterProtocol: class {
     var interactor: TrackListInteractorProtocol! { get set }
     var wireFrame: TrackListWireFrameProtocol! { get set }
     
-    func showTrackDetail(for track: Track, from: UIView)
+    func showTrackDetail(for track: Track)
     func updateArtists(query: String, fetchRemote: Bool)
 }
 
@@ -42,5 +43,5 @@ protocol TrackListInteractorProtocol: class {
 
 protocol TrackListWireFrameProtocol: class {
     func createTrackListModule() -> UIViewController
-    func presentTrackDetailModule(track: Track, from: UIView)
+    func presentTrackDetailModule(track: Track)
 }

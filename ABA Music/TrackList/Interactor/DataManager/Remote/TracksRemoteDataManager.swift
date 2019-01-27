@@ -19,7 +19,10 @@ class TracksRemoteDataManager: TracksRemoteDataProvider {
         if let urlString = "https://itunes.apple.com/search?term=\(query)&media=musicVideo&entity=musicVideo&attribute=artistTerm&limit=200".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlString) {
                 let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-                    guard let self = self, let data = data else { return }
+                    guard let self = self, let data = data else {
+                        completion(.failure(RemoteError.genericError))
+                        return
+                    }
                     do {
                         if let dict =  try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                             if let results = dict["results"] as? [[String : Any]] {

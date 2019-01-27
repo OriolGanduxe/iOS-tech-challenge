@@ -6,7 +6,7 @@
 //  Copyright © 2019 ABA English. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class TrackListPresenter {
     
@@ -17,11 +17,16 @@ class TrackListPresenter {
 
 extension TrackListPresenter: TrackListPresenterProtocol {
     
-    func showTrackDetail(for track: Track, from: UIView) {
-        wireFrame.presentTrackDetailModule(track: track, from: from)
+    func showTrackDetail(for track: Track) {
+        wireFrame.presentTrackDetailModule(track: track)
     }
     
     func updateArtists(query: String, fetchRemote: Bool) {
+        
+        guard query.count > 0 else {
+            view.showEmpty()
+            return
+        }
         
         if fetchRemote {
             view.loading(enabled: true)
@@ -34,8 +39,16 @@ extension TrackListPresenter: TrackListPresenterProtocol {
             switch result {
             case .success(let artists):
                 
-                let sortedArtists = self.sortArtistsAndTracks(artists: artists)
-                self.view.showArtistTracks(artists: sortedArtists)
+                if artists.count > 0 {
+                    let sortedArtists = self.sortArtistsAndTracks(artists: artists)
+                    self.view.showArtistTracks(artists: sortedArtists)
+                } else {
+                    if fetchRemote {
+                        self.view.showError(ArtistsError.emptyArtists)
+                    } else {
+                        self.view.showEmpty()
+                    }
+                }
                 
             case .failure(let error):
                 self.view.showError(error)

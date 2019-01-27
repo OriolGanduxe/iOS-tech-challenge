@@ -27,7 +27,7 @@ class TrackListPresenterTests: XCTestCase {
         presenter.wireFrame = MockTrackListWireFrame(testCase: self)
         let track = Track(trackId: 10, artistName: "artist10", trackName: "track10", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre10", country: "countryRoads", releaseDate: Date())
 
-        presenter.showTrackDetail(for: track, from: UIView())
+        presenter.showTrackDetail(for: track)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -38,7 +38,8 @@ class TrackListPresenterTests: XCTestCase {
 
     func testUpdateArtistsSuccess() {
         
-        presenter.view = MockTrackListViewExpectArtists(testCase: self)
+        let view = MockTrackListViewExpectArtists(testCase: self)
+        presenter.view = view
         presenter.updateArtists(query: "foo", fetchRemote: true)
         
         waitForExpectations(timeout: 1) { error in
@@ -51,7 +52,8 @@ class TrackListPresenterTests: XCTestCase {
     func testUpdateArtistsFailure() {
         
         mockInteractor.simulateFailure = true
-        presenter.view = MockTrackListViewExpectError(testCase: self)
+        let view =  MockTrackListViewExpectError(testCase: self)
+        presenter.view = view
         presenter.updateArtists(query: "foo", fetchRemote: true)
         
         waitForExpectations(timeout: 1) { error in
@@ -74,11 +76,14 @@ class MockTrackListInteractor: TrackListInteractorProtocol {
         if simulateFailure {
             completion(.failure(remote ? MockErrors.simulatedRemoteError : MockErrors.simulatedPersistenceError))
         } else {
-            let track1 = Track(trackId: 1, artistName: "artist1", trackName: "track1", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre1", country: "countryRoads", releaseDate: Date())
-            let track2 = Track(trackId: 2, artistName: "artist2", trackName: "track2", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
+            let track1 = Track(trackId: 1, artistName: "artistZZ", trackName: "trackBB", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre1", country: "countryRoads", releaseDate: Date())
+            let track2 = Track(trackId: 2, artistName: "artistZZ", trackName: "trackCC", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
+            let track3 = Track(trackId: 3, artistName: "artistAA", trackName: "trackAA", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
+            let track4 = Track(trackId: 4, artistName: "artistAA", trackName: "trackZZ", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
+
             
-            let artist1 = Artist(artistId: 1, artistName: "artist1", tracks: [track1])
-            let artist2 = Artist(artistId: 2, artistName: "artist2", tracks: [track2])
+            let artist1 = Artist(artistId: 1, artistName: "artistZZ", tracks: [track1, track2])
+            let artist2 = Artist(artistId: 2, artistName: "artistAA", tracks: [track3, track4])
             
             completion(.success([artist1, artist2]))
         }
@@ -99,8 +104,11 @@ class MockTrackListViewExpectArtists: TrackListViewProtocol {
         expLoadingDisabled = testCase.expectation(description: "Should stop loading once at least")
     }
     
+    func showEmpty() {}
+
     func showArtistTracks(artists: [Artist]) {
         XCTAssert(artists.count == 2)
+        checkArtistsOrder(artists: artists)
         exp.fulfill()
     }
     
@@ -113,6 +121,30 @@ class MockTrackListViewExpectArtists: TrackListViewProtocol {
             expLoadingEnabled.fulfill()
         } else {
             expLoadingDisabled.fulfill()
+        }
+    }
+    
+    private func checkArtistsOrder(artists: [Artist]) {
+    
+        var prevArtistName = ""
+        var prevTrackName = ""
+
+        for artist in artists {
+    
+            if artist.artistName < prevArtistName {
+                XCTFail("Artists not in ascending order")
+            } else {
+                prevArtistName = artist.artistName
+            }
+            
+            for track in artist.tracks {
+                if track.trackName < prevTrackName {
+                    XCTFail("Tracks not in ascending order")
+                } else {
+                    prevTrackName = track.trackName
+                }
+            }
+            prevTrackName = ""
         }
     }
 }
@@ -131,6 +163,8 @@ class MockTrackListViewExpectError: TrackListViewProtocol {
         expLoadingDisabled = testCase.expectation(description: "Should stop loading once at least")
     }
     
+    func showEmpty() {}
+
     func showArtistTracks(artists: [Artist]) {
         XCTFail("Unexpected show success")
     }
@@ -138,6 +172,7 @@ class MockTrackListViewExpectError: TrackListViewProtocol {
     func showError(_ error: Error) {
         exp.fulfill()
     }
+    
     func loading(enabled: Bool) {
         if enabled {
             expLoadingEnabled.fulfill()
@@ -160,7 +195,7 @@ class MockTrackListWireFrame: TrackListWireFrameProtocol {
         return UIViewController()
     }
     
-    func presentTrackDetailModule(track: Track, from: UIView) {
+    func presentTrackDetailModule(track: Track) {
         XCTAssert(track.trackId == 10)
         exp.fulfill()
     }

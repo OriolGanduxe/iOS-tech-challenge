@@ -2,7 +2,7 @@ import UIKit
 import AlamofireImage
 
 protocol TrackCollectionViewCellDelegate {
-    func didPressTrack(_ track: Track, from: UIView)
+    func didPressTrack(_ track: Track)
 }
 
 class TrackCollectionViewCell: UICollectionViewCell {
@@ -14,13 +14,16 @@ class TrackCollectionViewCell: UICollectionViewCell {
     var track: Track! {
         didSet {
             trackNameLabel.text = track.trackName
-            thumbnailImageView.af_setImage(withURL: URL(string: track!.artworkUrl100)!)
+           
+            let imageURL = URL(string: track!.artworkUrl100)!
+            let placeholderImage = UIImage(named: "track_placeholder")
+            thumbnailImageView.af_setImage(withURL: imageURL, placeholderImage: placeholderImage)
             let gesture = UITapGestureRecognizer(target: self, action: #selector(pressTrack))
             self.addGestureRecognizer(gesture)
         }
     }
     
     @objc func pressTrack() {
-        delegate?.didPressTrack(track!, from: self)
+        delegate?.didPressTrack(track!)
     }
 }

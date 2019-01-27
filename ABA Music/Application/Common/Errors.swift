@@ -8,11 +8,8 @@
 
 import Foundation
 
-// TODO: Use and improve
-enum PersistenceError: Error {
-    case managedObjectContextNotFound
-    case couldNotSaveObject
-    case objectNotFound
+enum ArtistsError: Error {
+    case emptyArtists
 }
 
 enum RemoteError: Error {

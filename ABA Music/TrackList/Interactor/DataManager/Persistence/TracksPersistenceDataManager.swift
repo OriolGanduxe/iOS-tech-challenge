@@ -34,8 +34,6 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     
     func storeArtists(artists: [Artist], completion: StoreResults) {
         
-        // TODO: Improve this code so it only stores unexistent artists
-        
         do {
             let artistsIds = artists.map { $0.artistId }
             let existingIds = try checkArtistIdExists(ids: artistsIds)

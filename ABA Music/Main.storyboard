@@ -36,7 +36,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BNZ-DT-FGF">
-                                                    <rect key="frame" x="0.0" y="55" width="375" height="169.5"/>
+                                                    <rect key="frame" x="0.0" y="55" width="375" height="170"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SfG-Dh-tta">
@@ -109,18 +109,49 @@
                                     <outlet property="delegate" destination="AQI-PM-L77" id="K5o-Cq-QIq"/>
                                 </connections>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYq-gd-mnx" userLabel="FeedbackView">
+                                <rect key="frame" x="47.5" y="340" width="280" height="51.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-DY-cM0" userLabel="FeedbackLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="21.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="Ec4-cZ-1G7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0lK-iq-9vf">
+                                        <rect key="frame" x="130" y="31.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0lK-iq-9vf" firstAttribute="centerX" secondItem="rYq-gd-mnx" secondAttribute="centerX" id="4Wx-Bc-7av"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="hr7-DY-cM0" secondAttribute="trailing" id="HD1-HW-YpI"/>
+                                    <constraint firstItem="hr7-DY-cM0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rYq-gd-mnx" secondAttribute="leading" id="TMh-1T-XZ4"/>
+                                    <constraint firstItem="hr7-DY-cM0" firstAttribute="top" secondItem="rYq-gd-mnx" secondAttribute="top" id="ZA3-Nc-7jN"/>
+                                    <constraint firstItem="hr7-DY-cM0" firstAttribute="centerX" secondItem="rYq-gd-mnx" secondAttribute="centerX" id="eJA-YI-1Af"/>
+                                    <constraint firstAttribute="bottom" secondItem="0lK-iq-9vf" secondAttribute="bottom" id="v87-YB-OFk"/>
+                                    <constraint firstItem="0lK-iq-9vf" firstAttribute="top" secondItem="hr7-DY-cM0" secondAttribute="bottom" constant="10" id="wEy-bz-M7o"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QsZ-tj-J0I" firstAttribute="leading" secondItem="FAe-wx-B3t" secondAttribute="leading" id="0h6-VE-h96"/>
+                            <constraint firstItem="rYq-gd-mnx" firstAttribute="centerX" secondItem="FAe-wx-B3t" secondAttribute="centerX" id="Iak-fj-F2n"/>
                             <constraint firstItem="FAe-wx-B3t" firstAttribute="trailing" secondItem="QsZ-tj-J0I" secondAttribute="trailing" id="TNV-wI-dWE"/>
                             <constraint firstItem="FAe-wx-B3t" firstAttribute="bottom" secondItem="QsZ-tj-J0I" secondAttribute="bottom" id="cdw-0O-w8K"/>
+                            <constraint firstItem="rYq-gd-mnx" firstAttribute="centerY" secondItem="FAe-wx-B3t" secondAttribute="centerY" id="dQ1-IW-Q7U"/>
                             <constraint firstItem="FAe-wx-B3t" firstAttribute="top" secondItem="QsZ-tj-J0I" secondAttribute="top" id="nwg-1D-SSS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FAe-wx-B3t"/>
                     </view>
                     <navigationItem key="navigationItem" id="rxO-kA-gRI"/>
                     <connections>
+                        <outlet property="feedbackLabel" destination="hr7-DY-cM0" id="RXC-8n-qFl"/>
+                        <outlet property="spinner" destination="0lK-iq-9vf" id="6rB-jq-1jG"/>
                         <outlet property="tableView" destination="QsZ-tj-J0I" id="qfP-jR-ja2"/>
                     </connections>
                 </viewController>
