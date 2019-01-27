@@ -12,15 +12,16 @@ import CoreData
 typealias StoreResults = (Result<Void>) -> Void
 
 protocol TracksPersistenceDataProvider: class {
-    func cachedArtists(completion: FetchArtistsResults)
+    func cachedArtists(query: String, completion: FetchArtistsResults)
     func storeArtists(artists: [Artist], completion: StoreResults)
 }
 
 class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     
-    func cachedArtists(completion: FetchArtistsResults) {
-        
+    func cachedArtists(query: String, completion: FetchArtistsResults) {
+                
         let request: NSFetchRequest<ArtistEntity> = ArtistEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "artistName CONTAINS %@", query)
         
         do {
             let artists = try CoreDataStack.managedObjectContext.fetch(request)

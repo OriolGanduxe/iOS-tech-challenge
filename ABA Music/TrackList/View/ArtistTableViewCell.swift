@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ArtistTableViewCellDelegate {
-    func didPressTrack(_ track: Track)
+    func didPressTrack(_ track: Track, from: UIView)
 }
 
 class ArtistTableViewCell: UITableViewCell {
@@ -22,8 +22,8 @@ class ArtistTableViewCell: UITableViewCell {
 
 extension ArtistTableViewCell: TrackCollectionViewCellDelegate {
     
-    func didPressTrack(_ track: Track) {
-        delegate?.didPressTrack(track)
+    func didPressTrack(_ track: Track, from: UIView) {
+        delegate?.didPressTrack(track, from: from)
     }
 }
 
@@ -40,13 +40,6 @@ extension ArtistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrackCollectionViewCell", for: indexPath) as! TrackCollectionViewCell
         cell.track = artist.tracks[indexPath.row]
         cell.delegate = self
-        cell.layer.borderColor = UIColor.blue.cgColor
-        cell.layer.borderWidth = 1.0
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // TODO: Review this code
-        return CGSize(width: collectionView.frame.width * 0.25, height: collectionView.frame.height / 1.5)
     }
 }

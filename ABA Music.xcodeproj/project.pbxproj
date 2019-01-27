@@ -26,6 +26,11 @@
 		4C4CC68B21FA270F00BBCFCC /* TrackListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */; };
 		4C4CC68D21FA2CF600BBCFCC /* Storyboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68C21FA2CF600BBCFCC /* Storyboard+extension.swift */; };
 		4C4CC69021FB0D8F00BBCFCC /* NSManagedObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68F21FB0D8F00BBCFCC /* NSManagedObject+extension.swift */; };
+		4C4CC69421FB77FF00BBCFCC /* TrackDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */; };
+		4C4CC69621FB783B00BBCFCC /* TrackDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */; };
+		4C4CC69821FB7A6E00BBCFCC /* TrackDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */; };
+		4C4CC69A21FDC96400BBCFCC /* TrackListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69921FDC96400BBCFCC /* TrackListInteractorTests.swift */; };
+		4C4CC69C21FDCC8500BBCFCC /* MockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69B21FDCC8500BBCFCC /* MockGenerator.swift */; };
 		861067A0F6F540EE0EB4889F /* Pods_ABA_Music.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05B3E277D1E98033BCBA05D /* Pods_ABA_Music.framework */; };
 		8B0CEE4321B54C2700C39C58 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0CEE4221B54C2700C39C58 /* Artist.swift */; };
 		8B0EFD0821960BF80024DAA2 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0EFD0721960BF80024DAA2 /* ArtistTableViewCell.swift */; };
@@ -36,7 +41,6 @@
 		8BC33F4C21944CDE00E3759C /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC33F4B21944CDE00E3759C /* TrackListViewController.swift */; };
 		8BC33F5121944CDF00E3759C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC33F5021944CDF00E3759C /* Assets.xcassets */; };
 		8BC33F5421944CDF00E3759C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BC33F5221944CDF00E3759C /* LaunchScreen.storyboard */; };
-		8BC33F5F21944CDF00E3759C /* ABA_MusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC33F5E21944CDF00E3759C /* ABA_MusicTests.swift */; };
 		8BC33F6A21944CDF00E3759C /* ABA_MusicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC33F6921944CDF00E3759C /* ABA_MusicUITests.swift */; };
 		980D63085AC1F41300E2D288 /* Pods_ABA_MusicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CC18A205AAE9C8AE379516 /* Pods_ABA_MusicTests.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +83,11 @@
 		4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListInteractor.swift; sourceTree = "<group>"; };
 		4C4CC68C21FA2CF600BBCFCC /* Storyboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+extension.swift"; sourceTree = "<group>"; };
 		4C4CC68F21FB0D8F00BBCFCC /* NSManagedObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+extension.swift"; sourceTree = "<group>"; };
+		4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailProtocols.swift; sourceTree = "<group>"; };
+		4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailPresenter.swift; sourceTree = "<group>"; };
+		4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailWireFrame.swift; sourceTree = "<group>"; };
+		4C4CC69921FDC96400BBCFCC /* TrackListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListInteractorTests.swift; sourceTree = "<group>"; };
+		4C4CC69B21FDCC8500BBCFCC /* MockGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGenerator.swift; sourceTree = "<group>"; };
 		5559EF89746914D3CD9937D8 /* Pods-ABA MusicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABA MusicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ABA MusicTests/Pods-ABA MusicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		581F2A21C841711C6B8A69A9 /* Pods-ABA MusicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABA MusicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ABA MusicTests/Pods-ABA MusicTests.release.xcconfig"; sourceTree = "<group>"; };
 		71DEC0EE01917AA36C5F79A0 /* Pods-ABA Music.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABA Music.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ABA Music/Pods-ABA Music.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +104,6 @@
 		8BC33F5321944CDF00E3759C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BC33F5521944CDF00E3759C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BC33F5A21944CDF00E3759C /* ABA MusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ABA MusicTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BC33F5E21944CDF00E3759C /* ABA_MusicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABA_MusicTests.swift; sourceTree = "<group>"; };
 		8BC33F6021944CDF00E3759C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BC33F6521944CDF00E3759C /* ABA MusicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ABA MusicUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC33F6921944CDF00E3759C /* ABA_MusicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABA_MusicUITests.swift; sourceTree = "<group>"; };
@@ -136,11 +144,10 @@
 		4C4CC66521F8A9B200BBCFCC /* TrackList */ = {
 			isa = PBXGroup;
 			children = (
-				4C4CC66D21F8AB4A00BBCFCC /* DataManager */,
 				4C4CC68E21FA40C600BBCFCC /* View */,
+				4C4CC69221FB772100BBCFCC /* Interactor */,
 				4C4CC66721F8A9FA00BBCFCC /* TrackListPresenter.swift */,
 				4C4CC66921F8AA2900BBCFCC /* TrackListWireFrame.swift */,
-				4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */,
 				4C4CC66B21F8AA3900BBCFCC /* TrackListProtocols.swift */,
 			);
 			path = TrackList;
@@ -151,6 +158,9 @@
 			children = (
 				8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */,
 				8BA3CDD4219761CB005264D4 /* PlayerView.swift */,
+				4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */,
+				4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */,
+				4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */,
 			);
 			path = TrackDetail;
 			sourceTree = "<group>";
@@ -167,12 +177,7 @@
 		4C4CC67F21F9B59300BBCFCC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				4C4CC67A21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift */,
-				4C4CC67821F8B18700BBCFCC /* ArtistEntity+CoreDataProperties.swift */,
-				4C4CC67921F8B18800BBCFCC /* TrackEntity+CoreDataClass.swift */,
-				4C4CC67721F8B18700BBCFCC /* TrackEntity+CoreDataProperties.swift */,
-				4C4CC67221F8AD8C00BBCFCC /* Tracks.xcdatamodeld */,
-				4C4CC67521F8ADC000BBCFCC /* CoreDataStack.swift */,
+				4C4CC69121FB4DAA00BBCFCC /* CoreData */,
 				4C4CC68121F9B6E000BBCFCC /* TracksPersistenceDataManager.swift */,
 			);
 			path = Persistence;
@@ -205,6 +210,28 @@
 				8B0EFD0921960E5D0024DAA2 /* TrackCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4C4CC69121FB4DAA00BBCFCC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4C4CC67A21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift */,
+				4C4CC67821F8B18700BBCFCC /* ArtistEntity+CoreDataProperties.swift */,
+				4C4CC67921F8B18800BBCFCC /* TrackEntity+CoreDataClass.swift */,
+				4C4CC67721F8B18700BBCFCC /* TrackEntity+CoreDataProperties.swift */,
+				4C4CC67521F8ADC000BBCFCC /* CoreDataStack.swift */,
+				4C4CC67221F8AD8C00BBCFCC /* Tracks.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		4C4CC69221FB772100BBCFCC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4C4CC66D21F8AB4A00BBCFCC /* DataManager */,
+				4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		8B0CEE4621B54C8800C39C58 /* Models */ = {
@@ -265,8 +292,9 @@
 		8BC33F5D21944CDF00E3759C /* ABA MusicTests */ = {
 			isa = PBXGroup;
 			children = (
-				8BC33F5E21944CDF00E3759C /* ABA_MusicTests.swift */,
 				8BC33F6021944CDF00E3759C /* Info.plist */,
+				4C4CC69921FDC96400BBCFCC /* TrackListInteractorTests.swift */,
+				4C4CC69B21FDCC8500BBCFCC /* MockGenerator.swift */,
 			);
 			path = "ABA MusicTests";
 			sourceTree = "<group>";
@@ -544,11 +572,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C4CC67D21F8B18800BBCFCC /* TrackEntity+CoreDataClass.swift in Sources */,
+				4C4CC69421FB77FF00BBCFCC /* TrackDetailProtocols.swift in Sources */,
 				4C4CC68221F9B6E100BBCFCC /* TracksPersistenceDataManager.swift in Sources */,
 				4C4CC68D21FA2CF600BBCFCC /* Storyboard+extension.swift in Sources */,
 				8BC33F4C21944CDE00E3759C /* TrackListViewController.swift in Sources */,
 				4C4CC67121F8AC5F00BBCFCC /* Track.swift in Sources */,
 				8BC33F4A21944CDE00E3759C /* AppDelegate.swift in Sources */,
+				4C4CC69621FB783B00BBCFCC /* TrackDetailPresenter.swift in Sources */,
 				8B4699BC21975EE100A82349 /* TrackDetailViewController.swift in Sources */,
 				8BA3CDD5219761CC005264D4 /* PlayerView.swift in Sources */,
 				4C4CC66821F8A9FA00BBCFCC /* TrackListPresenter.swift in Sources */,
@@ -558,6 +588,7 @@
 				4C4CC66A21F8AA2900BBCFCC /* TrackListWireFrame.swift in Sources */,
 				4C4CC67E21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift in Sources */,
 				4C4CC68921F9C00300BBCFCC /* Errors.swift in Sources */,
+				4C4CC69821FB7A6E00BBCFCC /* TrackDetailWireFrame.swift in Sources */,
 				4C4CC69021FB0D8F00BBCFCC /* NSManagedObject+extension.swift in Sources */,
 				4C4CC67B21F8B18800BBCFCC /* TrackEntity+CoreDataProperties.swift in Sources */,
 				4C4CC68721F9BFE700BBCFCC /* Endpoints.swift in Sources */,
@@ -574,7 +605,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BC33F5F21944CDF00E3759C /* ABA_MusicTests.swift in Sources */,
+				4C4CC69A21FDC96400BBCFCC /* TrackListInteractorTests.swift in Sources */,
+				4C4CC69C21FDCC8500BBCFCC /* MockGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

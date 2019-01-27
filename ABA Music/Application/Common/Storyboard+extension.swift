@@ -9,8 +9,8 @@
 import UIKit
 
 enum ModuleStoryboardEntryPoint: String {
-    case trackList = "NavigationController"
-    case trackDetail = "UITrackDetailViewController"
+    case trackList = "TrackListViewController"
+    case trackDetail = "TrackDetailViewController"
 }
 
 extension UIStoryboard {

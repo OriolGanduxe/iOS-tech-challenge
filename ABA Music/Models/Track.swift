@@ -16,7 +16,7 @@ class Track: Equatable {
     var artworkUrl100: String
     var primaryGenreName: String
     var country: String
-    var releaseDate: Date // TODO: Make this Date
+    var releaseDate: Date
     
     init(trackId: Int, artistName: String, trackName: String, previewUrl: String, artworkUrl100: String, primaryGenreName: String, country: String, releaseDate: Date) {
         self.trackId = trackId

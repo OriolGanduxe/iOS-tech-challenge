@@ -9,16 +9,14 @@
 import Foundation
 
 protocol TracksRemoteDataProvider: class {
-    func fetchArtists(completion: @escaping FetchArtistsResults)
+    func fetchArtists(query: String, completion: @escaping FetchArtistsResults)
 }
 
 class TracksRemoteDataManager: TracksRemoteDataProvider {
     
-    func fetchArtists(completion: @escaping FetchArtistsResults) {
-        // TODO: Inject term
+    func fetchArtists(query: String, completion: @escaping FetchArtistsResults) {
 
-        let term = "Jackson"
-        if let urlString = "https://itunes.apple.com/search?term=\(term)&media=musicVideo&entity=musicVideo&attribute=artistTerm&limit=200".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        if let urlString = "https://itunes.apple.com/search?term=\(query)&media=musicVideo&entity=musicVideo&attribute=artistTerm&limit=200".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlString) {
                 let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
                     guard let self = self, let data = data else { return }

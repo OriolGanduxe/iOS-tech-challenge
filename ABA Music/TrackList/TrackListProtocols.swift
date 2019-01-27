@@ -6,7 +6,7 @@
 //  Copyright © 2019 ABA English. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Result<T> {
     case success(T)
@@ -29,7 +29,8 @@ protocol TrackListPresenterProtocol {
     var wireFrame: TrackListWireFrameProtocol! { get set }
     
     func viewDidLoad()
-    func showTrackDetail(for track: Track)
+    func showTrackDetail(for track: Track, from: UIView)
+    func updateArtists(query: String, fetchRemote: Bool)
 }
 
 protocol TrackListInteractorProtocol {
@@ -37,8 +38,10 @@ protocol TrackListInteractorProtocol {
     var remoteDataProvider: TracksRemoteDataProvider! { get set }
     var persistenceDataProvider: TracksPersistenceDataProvider! { get set }
     
-    func retrieveArtists(completion: @escaping FetchArtistsResults)
+    func retrieveArtists(query: String, remote: Bool, completion: @escaping FetchArtistsResults)
 }
 
 protocol TrackListWireFrameProtocol {
+    func createTrackListModule() -> UIViewController
+    func presentTrackDetailModule(track: Track, from: UIView)
 }

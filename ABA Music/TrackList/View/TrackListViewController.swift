@@ -21,8 +21,23 @@ class TrackListViewController: UIViewController {
         super.viewDidLoad()
         title = "ABA Music"
 
+        setupSearchBar()
+        
         presenter.viewDidLoad()
 //        fetchData(term: "Jackson")
+    }
+    
+    private func setupSearchBar() {
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Artists"
+        searchController.searchBar.delegate = self
+        searchController.searchBar.text = "Jackson"
+        searchController.searchBar.isHidden = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,6 +67,17 @@ class TrackListViewController: UIViewController {
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        return 0
 //    }
+}
+
+extension TrackListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        presenter.updateArtists(query: searchController.searchBar.text!, fetchRemote: false)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        presenter.updateArtists(query: searchBar.text!, fetchRemote: true)
+    }
 }
 
 extension TrackListViewController: TrackListViewProtocol {
@@ -105,7 +131,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TrackListViewController: ArtistTableViewCellDelegate {
     
-    func didPressTrack(_ track: Track) {
-        presenter.showTrackDetail(for: track)
+    func didPressTrack(_ track: Track, from: UIView) {
+        presenter.showTrackDetail(for: track, from: from)
     }
 }

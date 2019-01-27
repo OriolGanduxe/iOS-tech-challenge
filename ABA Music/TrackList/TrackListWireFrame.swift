@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TrackListWireFrame: TrackListWireFrameProtocol {
+class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
+    
+    var rootNavController: UINavigationController!
     
     func createTrackListModule() -> UIViewController {
         
-        let navController = UIStoryboard.mainStoryboard.viewController(for: .trackList) as! UINavigationController
-        let view = navController.children.first as! TrackListViewController
+        self.rootNavController = (UIStoryboard.mainStoryboard.viewController(for: .trackList) as! UINavigationController)
+        let view = rootNavController.children.first as! TrackListViewController
         let presenter = TrackListPresenter()
         let interactor = TrackListInteractor()
         let persistenceDataManager = TracksPersistenceDataManager()
@@ -27,16 +29,38 @@ class TrackListWireFrame: TrackListWireFrameProtocol {
         interactor.persistenceDataProvider = persistenceDataManager
         interactor.remoteDataProvider = remoteDataManager
         
-        return navController
+        return self.rootNavController
 
     }
 
-    // TODO
-//    func presentPostDetailScreen(from view: PostListViewProtocol, forPost post: PostModel) {
-//        let postDetailViewController = PostDetailWireFrame.createPostDetailModule(forPost: post)
-//
-//        if let sourceView = view as? UIViewController {
-//            sourceView.navigationController?.pushViewController(postDetailViewController, animated: true)
-//        }
-//    }
+    func presentTrackDetailModule(track: Track, from: UIView) {
+        
+        // TODO: Inject this wireframe? So we can control how to return?
+        let trackDetailView = TrackDetailWireFrame().createTrackDetailModule(for: track)
+//        self.rootNavController.pushViewController(trackDetailView, animated: true)
+    
+    
+        // set the presentation style
+        trackDetailView.modalPresentationStyle = UIModalPresentationStyle.popover
+
+        trackDetailView.preferredContentSize = CGSize(width: 300, height: 300)
+
+        // set up the popover presentation controller
+        trackDetailView.popoverPresentationController?.permittedArrowDirections = [.down]
+        trackDetailView.popoverPresentationController?.delegate = self
+        trackDetailView.popoverPresentationController?.sourceView = from
+        trackDetailView.popoverPresentationController?.sourceRect = rootNavController.view.bounds
+
+        // present the popover
+        rootNavController.present(trackDetailView, animated: true, completion: nil)
+    
+    }
+}
+
+extension TrackListWireFrame:  UIPopoverPresentationControllerDelegate {
+ 
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        // return UIModalPresentationStyle.FullScreen
+        return UIModalPresentationStyle.none
+    }
 }

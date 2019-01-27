@@ -2,7 +2,7 @@ import UIKit
 import AlamofireImage
 
 protocol TrackCollectionViewCellDelegate {
-    func didPressTrack(_ track: Track)
+    func didPressTrack(_ track: Track, from: UIView)
 }
 
 class TrackCollectionViewCell: UICollectionViewCell {
@@ -21,13 +21,6 @@ class TrackCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func pressTrack() {
-        delegate?.didPressTrack(track!)
-    }
- 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = 5
-        thumbnailImageView.layer.cornerRadius = 5
-        thumbnailImageView.clipsToBounds = true
+        delegate?.didPressTrack(track!, from: self)
     }
 }
