@@ -10,7 +10,7 @@ import Foundation
 
 class TrackListInteractor {
     
-    var presenter: TrackListPresenterProtocol!
+    weak var presenter: TrackListPresenterProtocol!
     var remoteDataProvider: TracksRemoteDataProvider!
     var persistenceDataProvider: TracksPersistenceDataProvider!
 }

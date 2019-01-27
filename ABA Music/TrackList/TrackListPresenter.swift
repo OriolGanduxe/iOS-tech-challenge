@@ -10,16 +10,12 @@ import UIKit
 
 class TrackListPresenter {
     
-    var view: TrackListViewProtocol!
+    weak var view: TrackListViewProtocol!
     var interactor: TrackListInteractorProtocol!
     var wireFrame: TrackListWireFrameProtocol!
 }
 
 extension TrackListPresenter: TrackListPresenterProtocol {
-    
-    func viewDidLoad() {
-        // TODO: Necessary?
-    }
     
     func showTrackDetail(for track: Track, from: UIView) {
         wireFrame.presentTrackDetailModule(track: track, from: from)

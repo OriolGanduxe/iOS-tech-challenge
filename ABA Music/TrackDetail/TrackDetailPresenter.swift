@@ -10,7 +10,7 @@ import Foundation
 
 class TrackDetailPresenter {
     
-    var view: TrackDetailViewProtocol!
+    weak var view: TrackDetailViewProtocol!
     var wireFrame: TrackDetailWireFrameProtocol!
     var track: Track!
         

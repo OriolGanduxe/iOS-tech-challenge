@@ -21,10 +21,7 @@ class TrackListViewController: UIViewController {
         super.viewDidLoad()
         title = "ABA Music"
 
-        setupSearchBar()
-        
-        presenter.viewDidLoad()
-//        fetchData(term: "Jackson")
+        setupSearchBar()        
     }
     
     private func setupSearchBar() {

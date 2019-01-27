@@ -50,12 +50,6 @@ class TrackDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         playerView.play()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        playerView.pause()
-        // TODO: This pauses but the view still retained in memory, fix!
-    }
 
     func addLabel(text: String, size: CGFloat) {
         let label = UILabel()

@@ -10,7 +10,7 @@ import UIKit
 
 class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
     
-    var rootNavController: UINavigationController!
+    weak var rootNavController: UINavigationController!
     
     func createTrackListModule() -> UIViewController {
         

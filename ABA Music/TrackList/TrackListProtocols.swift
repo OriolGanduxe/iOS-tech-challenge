@@ -15,7 +15,7 @@ enum Result<T> {
 
 typealias FetchArtistsResults = (Result<[Artist]>) -> Void
 
-protocol TrackListViewProtocol {
+protocol TrackListViewProtocol: class {
     var presenter: TrackListPresenterProtocol! { get set }
     
     func showArtistTracks(artists: [Artist])
@@ -23,17 +23,16 @@ protocol TrackListViewProtocol {
     func loading(enabled: Bool)
 }
 
-protocol TrackListPresenterProtocol {
+protocol TrackListPresenterProtocol: class {
     var view: TrackListViewProtocol! { get set }
     var interactor: TrackListInteractorProtocol! { get set }
     var wireFrame: TrackListWireFrameProtocol! { get set }
     
-    func viewDidLoad()
     func showTrackDetail(for track: Track, from: UIView)
     func updateArtists(query: String, fetchRemote: Bool)
 }
 
-protocol TrackListInteractorProtocol {
+protocol TrackListInteractorProtocol: class {
     var presenter: TrackListPresenterProtocol! { get set }
     var remoteDataProvider: TracksRemoteDataProvider! { get set }
     var persistenceDataProvider: TracksPersistenceDataProvider! { get set }
@@ -41,7 +40,7 @@ protocol TrackListInteractorProtocol {
     func retrieveArtists(query: String, remote: Bool, completion: @escaping FetchArtistsResults)
 }
 
-protocol TrackListWireFrameProtocol {
+protocol TrackListWireFrameProtocol: class {
     func createTrackListModule() -> UIViewController
     func presentTrackDetailModule(track: Track, from: UIView)
 }
