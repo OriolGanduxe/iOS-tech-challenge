@@ -23,8 +23,6 @@ class TrackDetailViewController: UIViewController {
         
         playerView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-//        playerView.layer.borderColor = UIColor.blue.cgColor
-//        playerView.layer.borderWidth = 1
         view.addSubview(playerView)
         view.addSubview(stackView)
         playerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true

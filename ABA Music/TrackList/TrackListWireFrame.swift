@@ -31,7 +31,6 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
         interactor.remoteDataProvider = remoteDataManager
         
         return self.rootNavController
-
     }
 
     func presentTrackDetailModule(track: Track) {
@@ -41,7 +40,7 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
         // set the presentation style
         trackDetailView.modalPresentationStyle = UIModalPresentationStyle.popover
 
-        trackDetailView.preferredContentSize = CGSize(width: 300, height: 350)
+        trackDetailView.preferredContentSize = adaptativeContentSize
 
         // set up the popover presentation controller
         trackDetailView.popoverPresentationController?.permittedArrowDirections = []
@@ -52,17 +51,26 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
         // present the popover
         rootNavController.present(trackDetailView, animated: true, completion: nil)
     }
+    
+    func dismissTrackDetailModule() {
+        rootNavController.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    private var adaptativeContentSize: CGSize {
+        get {
+            // Dummy logic to show a bigger video preview iPad devices
+            if UIScreen.main.bounds.width > 600 && UIScreen.main.bounds.height > 600 {
+                return CGSize(width: 500, height: 450)
+            } else {
+                return CGSize(width: 300, height: 330)
+            }
+        }
+    }
 }
 
 extension TrackListWireFrame:  UIPopoverPresentationControllerDelegate {
  
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-
         return UIModalPresentationStyle.none
-    }
-    
-    func popoverPresentationController(_ popoverPresentationController: UIPopoverPresentationController, willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>, in view: AutoreleasingUnsafeMutablePointer<UIView>) {
-        
-        rootNavController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }

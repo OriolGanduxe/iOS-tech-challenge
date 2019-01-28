@@ -21,7 +21,7 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     func cachedArtists(query: String, completion: FetchArtistsResults) {
                 
         let request: NSFetchRequest<ArtistEntity> = ArtistEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "artistName CONTAINS %@", query)
+        request.predicate = NSPredicate(format: "artistName CONTAINS[c] %@", query)
         
         do {
             let artists = try CoreDataStack.managedObjectContext.fetch(request)

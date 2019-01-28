@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 class TrackListPresenter {
     
@@ -16,6 +17,10 @@ class TrackListPresenter {
 }
 
 extension TrackListPresenter: TrackListPresenterProtocol {
+    
+    func viewSizeWillChange(to size: CGSize) {
+        wireFrame.dismissTrackDetailModule()
+    }
     
     func showTrackDetail(for track: Track) {
         wireFrame.presentTrackDetailModule(track: track)

@@ -29,6 +29,7 @@ protocol TrackListPresenterProtocol: class {
     var interactor: TrackListInteractorProtocol! { get set }
     var wireFrame: TrackListWireFrameProtocol! { get set }
     
+    func viewSizeWillChange(to size: CGSize) // TODO: Add to tests
     func showTrackDetail(for track: Track)
     func updateArtists(query: String, fetchRemote: Bool)
 }
@@ -44,4 +45,5 @@ protocol TrackListInteractorProtocol: class {
 protocol TrackListWireFrameProtocol: class {
     func createTrackListModule() -> UIViewController
     func presentTrackDetailModule(track: Track)
+    func dismissTrackDetailModule()  // TODO: Add to tests
 }

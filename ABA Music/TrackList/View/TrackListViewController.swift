@@ -45,6 +45,12 @@ class TrackListViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        presenter.viewSizeWillChange(to: size)
+    }
 }
 
 extension TrackListViewController: UISearchResultsUpdating, UISearchBarDelegate {
@@ -81,7 +87,6 @@ extension TrackListViewController: TrackListViewProtocol {
     }
     
     func showError(_ error: Error) {
-
 
         // For now I have this dummy logic, but we could have strings in the error enum
         // even localising them
@@ -139,6 +144,10 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 extension TrackListViewController: ArtistTableViewCellDelegate {
     
     func didPressTrack(_ track: Track) {
+        
+        // Dismissing the keyboard when the detail shows
+        navigationItem.searchController?.searchBar.resignFirstResponder()
+        
         presenter.showTrackDetail(for: track)
     }
 }
