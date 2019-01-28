@@ -36,12 +36,18 @@ class TrackListViewController: UIViewController {
     
     private func setupSearchBar() {
         
+        // As there's only one search bar I prefer having this appearance code next to the other searchbar stuff
+        // Otherwise this line should go somewhere else with the rest of the general appearance definitions
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Artists"
         searchController.searchBar.delegate = self
         searchController.searchBar.isHidden = false
+        searchController.searchBar.tintColor = .white // Cancel button color
+        
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }

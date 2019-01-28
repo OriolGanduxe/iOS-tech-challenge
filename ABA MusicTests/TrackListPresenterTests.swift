@@ -183,7 +183,7 @@ class MockTrackListViewExpectError: TrackListViewProtocol {
 }
 
 class MockTrackListWireFrame: TrackListWireFrameProtocol {
-    
+
     let exp: XCTestExpectation
     
     init(testCase: XCTestCase) {
@@ -199,4 +199,6 @@ class MockTrackListWireFrame: TrackListWireFrameProtocol {
         XCTAssert(track.trackId == 10)
         exp.fulfill()
     }
+    
+    func dismissTrackDetailModule() {}
 }

@@ -42,8 +42,4 @@ extension ArtistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.delegate = self
         return cell
     }
-    
-
-    
-//    shouldInvalidateLayoutForBoundsChange
 }

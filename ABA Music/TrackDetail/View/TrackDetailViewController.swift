@@ -64,7 +64,7 @@ class TrackDetailViewController: UIViewController {
         dateFormatterPrint.dateFormat = "MMM dd,yyyy"
         addLabel(text: dateFormatterPrint.string(from: track.releaseDate), size: 12, stackView: innerStack)
         
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = UIColor.darkGray
     }
 
     private func addLabel(text: String, size: CGFloat, medium: Bool = false, lines: Int = 1, stackView: UIStackView) {
