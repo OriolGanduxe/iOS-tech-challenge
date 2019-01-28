@@ -97,8 +97,8 @@
 		8B0CEE4221B54C2700C39C58 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		8B0EFD0721960BF80024DAA2 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		8B0EFD0921960E5D0024DAA2 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
-		8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailViewController.swift; sourceTree = "<group>"; };
-		8BA3CDD4219761CB005264D4 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackDetailViewController.swift; path = ../View/TrackDetailViewController.swift; sourceTree = "<group>"; };
+		8BA3CDD4219761CB005264D4 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = ../View/PlayerView.swift; sourceTree = "<group>"; };
 		8BC33F4621944CDE00E3759C /* ABA Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ABA Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC33F4921944CDE00E3759C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC33F4B21944CDE00E3759C /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
@@ -158,8 +158,7 @@
 		4C4CC66621F8A9C100BBCFCC /* TrackDetail */ = {
 			isa = PBXGroup;
 			children = (
-				8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */,
-				8BA3CDD4219761CB005264D4 /* PlayerView.swift */,
+				4CF510E421FF35F70023A0AB /* View */,
 				4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */,
 				4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */,
 				4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */,
@@ -235,6 +234,16 @@
 				4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4CF510E421FF35F70023A0AB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */,
+				8BA3CDD4219761CB005264D4 /* PlayerView.swift */,
+			);
+			name = View;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		8B0CEE4621B54C8800C39C58 /* Models */ = {
