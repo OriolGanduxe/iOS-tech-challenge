@@ -21,11 +21,9 @@
 		4C4CC67E21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC67A21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift */; };
 		4C4CC68221F9B6E100BBCFCC /* TracksPersistenceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68121F9B6E000BBCFCC /* TracksPersistenceDataManager.swift */; };
 		4C4CC68421F9BEFB00BBCFCC /* TracksRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68321F9BEFB00BBCFCC /* TracksRemoteDataManager.swift */; };
-		4C4CC68721F9BFE700BBCFCC /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68621F9BFE700BBCFCC /* Endpoints.swift */; };
 		4C4CC68921F9C00300BBCFCC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68821F9C00300BBCFCC /* Errors.swift */; };
 		4C4CC68B21FA270F00BBCFCC /* TrackListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */; };
 		4C4CC68D21FA2CF600BBCFCC /* Storyboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68C21FA2CF600BBCFCC /* Storyboard+extension.swift */; };
-		4C4CC69021FB0D8F00BBCFCC /* NSManagedObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC68F21FB0D8F00BBCFCC /* NSManagedObject+extension.swift */; };
 		4C4CC69421FB77FF00BBCFCC /* TrackDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */; };
 		4C4CC69621FB783B00BBCFCC /* TrackDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */; };
 		4C4CC69821FB7A6E00BBCFCC /* TrackDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */; };
@@ -79,11 +77,9 @@
 		4C4CC67A21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtistEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4C4CC68121F9B6E000BBCFCC /* TracksPersistenceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksPersistenceDataManager.swift; sourceTree = "<group>"; };
 		4C4CC68321F9BEFB00BBCFCC /* TracksRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksRemoteDataManager.swift; sourceTree = "<group>"; };
-		4C4CC68621F9BFE700BBCFCC /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		4C4CC68821F9C00300BBCFCC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		4C4CC68A21FA270F00BBCFCC /* TrackListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListInteractor.swift; sourceTree = "<group>"; };
 		4C4CC68C21FA2CF600BBCFCC /* Storyboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+extension.swift"; sourceTree = "<group>"; };
-		4C4CC68F21FB0D8F00BBCFCC /* NSManagedObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+extension.swift"; sourceTree = "<group>"; };
 		4C4CC69321FB77FF00BBCFCC /* TrackDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailProtocols.swift; sourceTree = "<group>"; };
 		4C4CC69521FB783B00BBCFCC /* TrackDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailPresenter.swift; sourceTree = "<group>"; };
 		4C4CC69721FB7A6E00BBCFCC /* TrackDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailWireFrame.swift; sourceTree = "<group>"; };
@@ -97,8 +93,8 @@
 		8B0CEE4221B54C2700C39C58 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		8B0EFD0721960BF80024DAA2 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		8B0EFD0921960E5D0024DAA2 /* TrackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionViewCell.swift; sourceTree = "<group>"; };
-		8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackDetailViewController.swift; path = ../View/TrackDetailViewController.swift; sourceTree = "<group>"; };
-		8BA3CDD4219761CB005264D4 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = ../View/PlayerView.swift; sourceTree = "<group>"; };
+		8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailViewController.swift; sourceTree = "<group>"; };
+		8BA3CDD4219761CB005264D4 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8BC33F4621944CDE00E3759C /* ABA Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ABA Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC33F4921944CDE00E3759C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC33F4B21944CDE00E3759C /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
@@ -195,10 +191,8 @@
 		4C4CC68521F9BFD800BBCFCC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4C4CC68621F9BFE700BBCFCC /* Endpoints.swift */,
 				4C4CC68821F9C00300BBCFCC /* Errors.swift */,
 				4C4CC68C21FA2CF600BBCFCC /* Storyboard+extension.swift */,
-				4C4CC68F21FB0D8F00BBCFCC /* NSManagedObject+extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -242,8 +236,7 @@
 				8B4699BB21975EE100A82349 /* TrackDetailViewController.swift */,
 				8BA3CDD4219761CB005264D4 /* PlayerView.swift */,
 			);
-			name = View;
-			path = "New Group";
+			path = View;
 			sourceTree = "<group>";
 		};
 		8B0CEE4621B54C8800C39C58 /* Models */ = {
@@ -529,10 +522,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ABA Music/Pods-ABA Music-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/CollectionViewSlantedLayout/CollectionViewSlantedLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -542,10 +533,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CollectionViewSlantedLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -602,9 +591,7 @@
 				4C4CC67E21F8B18800BBCFCC /* ArtistEntity+CoreDataClass.swift in Sources */,
 				4C4CC68921F9C00300BBCFCC /* Errors.swift in Sources */,
 				4C4CC69821FB7A6E00BBCFCC /* TrackDetailWireFrame.swift in Sources */,
-				4C4CC69021FB0D8F00BBCFCC /* NSManagedObject+extension.swift in Sources */,
 				4C4CC67B21F8B18800BBCFCC /* TrackEntity+CoreDataProperties.swift in Sources */,
-				4C4CC68721F9BFE700BBCFCC /* Endpoints.swift in Sources */,
 				4C4CC68B21FA270F00BBCFCC /* TrackListInteractor.swift in Sources */,
 				8B0EFD0A21960E5D0024DAA2 /* TrackCollectionViewCell.swift in Sources */,
 				4C4CC66C21F8AA3900BBCFCC /* TrackListProtocols.swift in Sources */,

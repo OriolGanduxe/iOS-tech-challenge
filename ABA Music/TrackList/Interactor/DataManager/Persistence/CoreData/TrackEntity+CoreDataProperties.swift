@@ -24,5 +24,4 @@ extension TrackEntity {
     @NSManaged public var primaryGenreName: String
     @NSManaged public var country: String
     @NSManaged public var releaseDate: NSDate
-
 }

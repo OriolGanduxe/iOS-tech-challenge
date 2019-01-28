@@ -8,6 +8,11 @@
 
 import UIKit
 
+// I decidided to leave this view as it was (with some extra simple changes)
+// This was because there's not much data to show, and instead of trying to fill stuff into this view, I made the container smaller so it looks better imo
+// I'm aware that by doing this we lose the full screen mode in landscape, but we could easily fix that by adding a button to go full screen regardless the rotation
+// Just didn't do it to keep this test simple.
+
 class TrackDetailViewController: UIViewController {
     
     var presenter: TrackDetailPresenterProtocol!
@@ -53,6 +58,7 @@ class TrackDetailViewController: UIViewController {
         addLabel(text: track.trackName, size: 18, medium: true, lines: 2, stackView: stackView)
         addLabel(text: track.primaryGenreName, size: 16, stackView: stackView)
         
+        // Added an extra stack view to show the date side by side with the country
         let innerStack = UIStackView()
         innerStack.axis = .horizontal
         innerStack.alignment = .fill

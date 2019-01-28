@@ -15,6 +15,7 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
 
     func createTrackListModule() -> UIViewController {
         
+        // Creating module parts/dependencies
         self.rootNavController = (UIStoryboard.mainStoryboard.viewController(for: .trackList) as! UINavigationController)
         let view = rootNavController.children.first as! TrackListViewController
         let presenter = TrackListPresenter()
@@ -22,6 +23,7 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
         let persistenceDataManager = TracksPersistenceDataManager()
         let remoteDataManager = TracksRemoteDataManager()
         
+        // Injecting dependencies one to each other
         view.presenter = presenter
         presenter.view = view
         presenter.wireFrame = self
@@ -39,7 +41,6 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
         
         // set the presentation style
         trackDetailView.modalPresentationStyle = UIModalPresentationStyle.popover
-
         trackDetailView.preferredContentSize = adaptativeContentSize
 
         // set up the popover presentation controller
@@ -70,6 +71,7 @@ class TrackListWireFrame: NSObject, TrackListWireFrameProtocol {
 
 extension TrackListWireFrame:  UIPopoverPresentationControllerDelegate {
  
+    // Required function to show popovers in iPhones
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }

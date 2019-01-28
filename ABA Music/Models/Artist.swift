@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Same decision taken than in Track class about ObjectMapper
+
 class Artist: Equatable {
     
     var artistId: Int

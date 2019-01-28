@@ -37,6 +37,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
             view.loading(enabled: true)
         }
         
+        // Interactor will fetch the data regardless the origin and will come back with the updates, using the same data contract
         interactor.retrieveArtists(query: query, remote: fetchRemote) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -61,6 +62,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         }
     }
 
+    // Regardless any way the data comes, we sort the artists and the tracks by name acending
     private func sortArtistsAndTracks(artists: [Artist]) -> [Artist] {
         
         let sortedArtists = artists.sorted { $0.artistName < $1.artistName }

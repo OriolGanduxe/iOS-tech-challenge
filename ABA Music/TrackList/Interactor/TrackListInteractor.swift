@@ -23,6 +23,8 @@ extension TrackListInteractor: TrackListInteractorProtocol {
             remoteDataProvider.fetchArtists(query: query) { [weak self] (result) in
                 guard let self = self else { return }
                 
+                // We don't know who implements TracksRemoteDataProvider, but we are failry sure this could come from another thread (as it's remote)
+                // So we dispatch to the main thread to update the UI properly
                 DispatchQueue.main.async {
                     
                     switch result {

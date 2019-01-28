@@ -8,6 +8,10 @@
 
 import Foundation
 
+// I considered using Alamofire ObjectMapper to map the result API request into this class, but because the tracks comes in
+// an array with a reference to Artist, and we want them grouped by artists instead of the other way around,
+// I left the current and simpler implementation. This way this init can also be used by the CoreData entities
+
 class Track: Equatable {
     var trackId: Int
     var artistName: String

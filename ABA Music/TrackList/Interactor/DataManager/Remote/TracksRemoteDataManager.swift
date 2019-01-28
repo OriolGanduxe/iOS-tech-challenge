@@ -12,10 +12,15 @@ protocol TracksRemoteDataProvider: class {
     func fetchArtists(query: String, completion: @escaping FetchArtistsResults)
 }
 
+// This concrete implementation of TracksRemoteDataProvider uses simple URLSession (as it was in the original implementation of the test)
+// I considered using Alamofire, but the way we use the models doesn't help us using ObjectMapper to easily map them.
+// We don't do any error handling other than reporting the errors and showing a simple generic label in the view, so there's no need to add more complexity.
 class TracksRemoteDataManager: TracksRemoteDataProvider {
     
     func fetchArtists(query: String, completion: @escaping FetchArtistsResults) {
 
+        // If we had more URLs we could certainly have a class to keep them tidied.
+        // But beacuse this url was composed by an injected query, I just left it here for convinience.
         if let urlString = "https://itunes.apple.com/search?term=\(query)&media=musicVideo&entity=musicVideo&attribute=artistTerm&limit=200".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let url = URL(string: urlString) {
                 let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
@@ -38,7 +43,6 @@ class TracksRemoteDataManager: TracksRemoteDataProvider {
                         
                     } catch let error {
                         completion(.failure(error))
-                        print(error.localizedDescription)
                     }
                 }
                 task.resume()
@@ -48,11 +52,16 @@ class TracksRemoteDataManager: TracksRemoteDataProvider {
         }
     }
     
+    // Grouping Tracks by Artists
+    // Tracks actually know nothing about the Artists, as the current use case doesn't require so,
+    // This way we prevent undesired retain cycles and reduce complexity
     private func tracksOnArtists(for dict: [[String : Any]]) -> [Artist] {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         
+        // artistsById keep Artists sorted by id, so we can access them in O(1) time
+        // This way the simple algo takes linear time
         var artistsById = [Int: Artist]()
         dict.forEach { jsonTrack in
             

@@ -16,6 +16,11 @@ protocol TracksPersistenceDataProvider: class {
     func storeArtists(artists: [Artist], completion: StoreResults)
 }
 
+// This implementation of TracksPersistenceDataProvider uses CoreData and make some assumptions such as:
+// 1) There's no clean up method, so tracks and artists are never deleted unless you wipe the app. This could be improved if needed.
+// 2) CacheArtists method fetches by artist name and is case insensitive
+// 3) If we are storing an artist that already exist (same artistId) it ignores it, so it's not possible to update artists
+// 4) Tracks are tied to artists, they come all together with the fetched artist
 class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     
     func cachedArtists(query: String, completion: FetchArtistsResults) {
@@ -44,24 +49,7 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
                 if !existingIds.contains(artist.artistId) {
                     // Skipping existing artists
                     
-                    let newArtistEntity = ArtistEntity(using: context)
-                    newArtistEntity.artistId = Int32(artist.artistId)
-                    newArtistEntity.artistName = artist.artistName
-                    
-                    for track in artist.tracks {
-                        
-                        let newTrackEntity = TrackEntity(using: context)
-                        newTrackEntity.trackId = Int32(track.trackId)
-                        newTrackEntity.trackName = track.trackName
-                        newTrackEntity.artistName = track.artistName
-                        newTrackEntity.previewUrl = track.previewUrl
-                        newTrackEntity.artworkUrl100 = track.artworkUrl100
-                        newTrackEntity.primaryGenreName = track.primaryGenreName
-                        newTrackEntity.country = track.country
-                        newTrackEntity.releaseDate = track.releaseDate as NSDate
-                        
-                        newArtistEntity.addToTracks(newTrackEntity)
-                    }
+                    let _ = ArtistEntity(artist: artist, context: context)
                 }
             }
             

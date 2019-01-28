@@ -18,7 +18,6 @@ extension ArtistEntity {
     @NSManaged public var artistId: Int32
     @NSManaged public var artistName: String
     @NSManaged public var tracks: Set<TrackEntity>
-
 }
 
 // MARK: Generated accessors for tracks
@@ -35,5 +34,4 @@ extension ArtistEntity {
 
     @objc(removeTracks:)
     @NSManaged public func removeFromTracks(_ values: NSSet)
-
 }

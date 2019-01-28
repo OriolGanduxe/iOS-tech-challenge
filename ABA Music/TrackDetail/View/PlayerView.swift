@@ -53,5 +53,4 @@ class PlayerView: UIView {
     func pause() {
         player.pause()
     }
-    
 }

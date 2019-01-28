@@ -10,7 +10,6 @@ import UIKit
 
 class TrackDetailWireFrame {
     
-    
 }
 
 extension TrackDetailWireFrame: TrackDetailWireFrameProtocol {
