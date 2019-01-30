@@ -37,6 +37,7 @@ class CoreDataStack {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
@@ -44,10 +45,13 @@ class CoreDataStack {
         return persistentContainer.viewContext
     }
     
+    static func newBackgroundContext() -> NSManagedObjectContext {
+        return persistentContainer.newBackgroundContext()
+    }
+    
     // MARK: - Core Data Saving support
     
-    static func saveContext() throws {
-        let context = persistentContainer.viewContext
+    static func saveContext(context: NSManagedObjectContext) throws {
         if context.hasChanges {
             try context.save()
         }

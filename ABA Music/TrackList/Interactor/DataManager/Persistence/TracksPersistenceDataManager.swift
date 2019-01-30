@@ -13,7 +13,7 @@ typealias StoreResults = (Result<Void>) -> Void
 
 protocol TracksPersistenceDataProvider: class {
     func cachedArtists(query: String, completion: FetchArtistsResults)
-    func storeArtists(artists: [Artist], completion: StoreResults)
+    func storeArtists(artists: [Artist], completion: @escaping  StoreResults)
 }
 
 // This implementation of TracksPersistenceDataProvider uses CoreData and make some assumptions such as:
@@ -37,28 +37,36 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
         }
     }
     
-    func storeArtists(artists: [Artist], completion: StoreResults) {
+    func storeArtists(artists: [Artist], completion: @escaping StoreResults) {
         
-        do {
-            let artistsIds = artists.map { $0.artistId }
-            let existingIds = try checkArtistIdExists(ids: artistsIds)
-        
-            let context = CoreDataStack.managedObjectContext
-            for artist in artists {
+        DispatchQueue.global().async { [weak self] in
+            
+            guard let self = self else { return; }
+            
+            do {
+                let artistsIds = artists.map { $0.artistId }
+                let existingIds = try self.checkArtistIdExists(ids: artistsIds)
                 
-                if !existingIds.contains(artist.artistId) {
-                    // Skipping existing artists
+                let context = CoreDataStack.newBackgroundContext()
+                for artist in artists {
                     
-                    let _ = ArtistEntity(artist: artist, context: context)
+                    if !existingIds.contains(artist.artistId) {
+                        // Skipping existing artists
+                        
+                        let _ = ArtistEntity(artist: artist, context: context)
+                    }
+                }
+                
+                try CoreDataStack.saveContext(context: context)
+                
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
                 }
             }
-            
-            try CoreDataStack.saveContext()
-            completion(.success(()))
-        
-        } catch {
-            completion(.failure(error))
-            return
         }
     }
     
