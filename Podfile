@@ -7,10 +7,6 @@ target 'ABA Music' do
 
   # Pods for ABA Music
   pod 'AlamofireImage'
-  pod 'CollectionViewSlantedLayout'
-  pod 'PureLayout'
-  pod 'SwiftyJSON', '~> 4.0'
-  pod 'Cache'
 
   target 'ABA MusicTests' do
     inherit! :search_paths
