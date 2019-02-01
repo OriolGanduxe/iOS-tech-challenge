@@ -20,6 +20,7 @@ class TracksRemoteDataManagerTests: XCTestCase {
         remoteDataManager = TracksRemoteDataManager()
     }
     
+    // TODO: Necessary? It still mocks :/
     let mockManager: SessionManager = {
         let configuration = URLSession.shared.configuration
         
@@ -42,16 +43,13 @@ class TracksRemoteDataManagerTests: XCTestCase {
             let stubPath = OHPathForFile("sampleCorrectRequest.json", type(of: self))
             return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
         }
-        
-        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
-            // TODO?
-        }
 
-        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistAndTrackName(query: "foo") { (results) in
             
             switch results {
             case .success(let tracks):
-                XCTAssert(tracks.count == 2)
+                // Doubles the mock jason, because it perfroms the call twice (for songName and artistName)
+                XCTAssert(tracks.count == 4)
                 exp.fulfill()
                 
             case .failure(let error):
@@ -77,11 +75,7 @@ class TracksRemoteDataManagerTests: XCTestCase {
             return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
         }
         
-        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
-            // TODO ?
-        }
-        
-        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistAndTrackName(query: "foo") { (results) in
             switch results {
             case .success(_):
                 XCTFail("Expecting error")
@@ -108,11 +102,7 @@ class TracksRemoteDataManagerTests: XCTestCase {
             return fixture(filePath: stubPath!, status: 400, headers: ["Content-Type":"application/json"])
         }
         
-        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
-            // TODO?
-        }
-        
-        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistAndTrackName(query: "foo") { (results) in
             switch results {
             case .success(_):
                 XCTFail("Expecting error")

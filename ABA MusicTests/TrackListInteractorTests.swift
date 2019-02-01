@@ -128,7 +128,7 @@ enum MockErrors: Error {
 class MockTracksRemoteDataManager: TracksRemoteDataProvider {
     var simulateFailure = false
     
-    func fetchByTrackName(query: String, completion: @escaping FetchTrackResults) {
+    func fetchByArtistAndTrackName(query: String, completion: @escaping FetchTrackResults) {
         if simulateFailure {
             completion(.failure(MockErrors.simulatedRemoteError))
         } else {
