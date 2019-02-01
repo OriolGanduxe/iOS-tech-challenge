@@ -139,7 +139,13 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        if traitCollection.horizontalSizeClass == .compact &&
+            artists[indexPath.row].tracks.count >= 10 {
+            // Allowing a double row on compact views with lots of tracks
+            return 370
+        } else {
+            return 210
+        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
