@@ -19,36 +19,23 @@ class TracksRemoteDataManager: TracksRemoteDataProvider {
     
     func fetchArtists(query: String, completion: @escaping FetchArtistsResults) {
 
-        // If we had more URLs we could certainly have a class to keep them tidied.
-        // But beacuse this url was composed by an injected query, I just left it here for convinience.
-        if let urlString = "https://itunes.apple.com/search?term=\(query)&media=musicVideo&entity=musicVideo&attribute=artistTerm&limit=200".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let url = URL(string: urlString) {
-                let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-                    guard let self = self, let data = data else {
-                        completion(.failure(RemoteError.genericError))
-                        return
-                    }
-                    do {
-                        if let dict =  try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                            if let results = dict["results"] as? [[String : Any]] {
-                                
-                                let artists = self.tracksOnArtists(for: results)
-                                completion(.success(artists))
-                            } else {
-                                completion(.failure(RemoteError.jsonWrongFormat))
-                            }
-                        } else {
-                            completion(.failure(RemoteError.jsonWrongFormat))
-                        }
-                        
-                    } catch let error {
-                        completion(.failure(error))
-                    }
+        AlamoFireJSONClient.makeAPICall(to: TracksEndpoints.fetchArtists(term: query, limit: 200)) { (result) in
+            
+            switch result {
+            case .success(let json):
+                
+                if let dict = json as? [String : Any],
+                    let results = dict["results"] as? [[String : Any]] {
+                    
+                    let artists = self.tracksOnArtists(for: results)
+                    completion(.success(artists))
+                } else {
+                    completion(.failure(RemoteError.jsonWrongFormat))
                 }
-                task.resume()
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
-        } else {
-            completion(.failure(RemoteError.genericError))
         }
     }
     

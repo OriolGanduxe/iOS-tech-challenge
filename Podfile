@@ -6,7 +6,9 @@ target 'ABA Music' do
   use_frameworks!
 
   # Pods for ABA Music
+  pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'OHHTTPStubs/Swift'
 
   target 'ABA MusicTests' do
     inherit! :search_paths
