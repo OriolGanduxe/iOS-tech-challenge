@@ -24,18 +24,16 @@ class TrackListInteractorTests: XCTestCase {
         interactor.persistenceDataProvider = persistenceDataManager
     }
 
-    func testRetrievePersistentArtistsSuccess() {
+    func testRetrievePersistentTracksSuccess() {
         
-        let exp = expectation(description: "Interactor should retrieve artists")
+        let exp = expectation(description: "Interactor should retrieve tracks")
         
-        interactor.retrieveArtists(query: "foo", remote: false) { (results) in
+        interactor.retrieveTracks(query: "foo", remote: false) { (results) in
             switch results {
-            case .success(let artists):
-                XCTAssert(artists.count == 2)
-                XCTAssert(artists[0].tracks.count == 1)
-                XCTAssert(artists[0].tracks[0].trackId == 1)
-                XCTAssert(artists[1].tracks.count == 1)
-                XCTAssert(artists[1].tracks[0].trackId == 2)
+            case .success(let tracks):
+                XCTAssert(tracks.count == 2)
+                XCTAssert(tracks[0].trackId == 1)
+                XCTAssert(tracks[1].trackId == 2)
 
                 exp.fulfill()
             case .failure(let error):
@@ -50,17 +48,16 @@ class TrackListInteractorTests: XCTestCase {
         }
     }
     
-    func testRetrieveRemoteArtistsSuccess() {
+    func testRetrieveRemoteTracksSuccess() {
         
-        let exp = expectation(description: "Interactor should retrieve artists")
+        let exp = expectation(description: "Interactor should retrieve tracks")
         
-        interactor.retrieveArtists(query: "foo", remote: true) { (results) in
+        interactor.retrieveTracks(query: "foo", remote: true) { (results) in
             switch results {
-            case .success(let artists):
-                XCTAssert(artists.count == 1)
-                XCTAssert(artists[0].tracks.count == 2)
-                XCTAssert(artists[0].tracks[0].trackId == 1)
-                XCTAssert(artists[0].tracks[1].trackId == 2)
+            case .success(let tracks):
+                XCTAssert(tracks.count == 2)
+                XCTAssert(tracks[0].trackId == 1)
+                XCTAssert(tracks[1].trackId == 2)
 
                 exp.fulfill()
             case .failure(let error):
@@ -75,12 +72,12 @@ class TrackListInteractorTests: XCTestCase {
         }
     }
     
-    func testRetrievePersistentArtistsFailure() {
+    func testRetrievePersistentTracksFailure() {
         
-        let exp = expectation(description: "Interactor should retrieve artists")
+        let exp = expectation(description: "Interactor should retrieve tracks")
         
         persistenceDataManager.simulateFailure = true
-        interactor.retrieveArtists(query: "foo", remote: false) { (results) in
+        interactor.retrieveTracks(query: "foo", remote: false) { (results) in
             switch results {
             case .success(_):
                 XCTFail("Unexpected success")
@@ -99,12 +96,12 @@ class TrackListInteractorTests: XCTestCase {
         }
     }
     
-    func testRetrieveRemoteArtistsFailure() {
+    func testRetrieveRemoteTracksFailure() {
         
-        let exp = expectation(description: "Interactor should retrieve artists")
+        let exp = expectation(description: "Interactor should retrieve tracks")
         
         remoteDataManager.simulateFailure = true
-        interactor.retrieveArtists(query: "foo", remote: true) { (results) in
+        interactor.retrieveTracks(query: "foo", remote: true) { (results) in
             switch results {
             case .success(_):
                 XCTFail("Unexpected success")
@@ -129,20 +126,21 @@ enum MockErrors: Error {
 }
 
 class MockTracksRemoteDataManager: TracksRemoteDataProvider {
-    
     var simulateFailure = false
     
-    func fetchArtists(query: String, completion: @escaping FetchArtistsResults) {
+    func fetchByTrackName(query: String, completion: @escaping FetchTrackResults) {
         if simulateFailure {
             completion(.failure(MockErrors.simulatedRemoteError))
         } else {
             let track1 = Track(trackId: 1, artistName: "artist1", trackName: "track1", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre1", country: "countryRoads", releaseDate: Date())
             let track2 = Track(trackId: 2, artistName: "artist2", trackName: "track2", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
-            
-            let artist1 = Artist(artistId: 1, artistName: "artist1", tracks: [track1, track2])
-            
-            completion(.success([artist1]))
+
+            completion(.success([track1, track2]))
         }
+    }
+    
+    func fetchByArtistName(query: String, completion: @escaping FetchTrackResults) {
+        // TODO
     }
 }
 
@@ -150,21 +148,18 @@ class MockTracksPersistenceDataManager: TracksPersistenceDataProvider {
     
     var simulateFailure = false
 
-    func cachedArtists(query: String, completion: (Result<[Artist]>) -> Void) {
+    func cachedTracks(query: String, completion: (Result<[Track]>) -> Void) {
         if simulateFailure {
             completion(.failure(MockErrors.simulatedPersistenceError))
         } else {
             let track1 = Track(trackId: 1, artistName: "artist1", trackName: "track1", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre1", country: "countryRoads", releaseDate: Date())
             let track2 = Track(trackId: 2, artistName: "artist2", trackName: "track2", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
 
-            let artist1 = Artist(artistId: 1, artistName: "artist1", tracks: [track1])
-            let artist2 = Artist(artistId: 2, artistName: "artist2", tracks: [track2])
-
-            completion(.success([artist1, artist2]))
+            completion(.success([track1, track2]))
         }
     }
     
-    func storeArtists(artists: [Artist], completion: (Result<Void>) -> Void) {
+    func storeTracks(tracks: [Track], completion: @escaping StoreResults) {
         if simulateFailure {
             completion(.failure(MockErrors.simulatedPersistenceError))
         } else {

@@ -8,6 +8,7 @@ target 'ABA Music' do
   # Pods for ABA Music
   pod 'Alamofire'
   pod 'AlamofireImage'
+  pod 'AlamofireObjectMapper'
   pod 'OHHTTPStubs/Swift'
 
   target 'ABA MusicTests' do

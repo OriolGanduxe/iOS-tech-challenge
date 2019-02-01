@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ArtistEntity" representedClassName="ArtistEntity" syncable="YES">
-        <attribute name="artistId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="artistName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tracks" toMany="YES" deletionRule="Cascade" destinationEntity="TrackEntity" syncable="YES"/>
-    </entity>
     <entity name="TrackEntity" representedClassName=".TrackEntity" syncable="YES">
         <attribute name="artistName" attributeType="String" syncable="YES"/>
         <attribute name="artworkUrl100" attributeType="String" syncable="YES"/>
         <attribute name="country" attributeType="String" syncable="YES"/>
-        <attribute name="previewUrl" attributeType="String" syncable="YES"/>
+        <attribute name="previewUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="primaryGenreName" attributeType="String" syncable="YES"/>
         <attribute name="releaseDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="trackId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="trackName" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TrackEntity" positionX="-6996.03125" positionY="-3408.03515625" width="128" height="163"/>
-        <element name="ArtistEntity" positionX="-6792.53125" positionY="-3414.72265625" width="128" height="88"/>
+        <element name="TrackEntity" positionX="-6996.03125" positionY="-3408.03515625" width="128" height="165"/>
     </elements>
 </model>

@@ -8,21 +8,18 @@
 
 import Foundation
 
-// Same decision taken than in Track class about ObjectMapper
-
-class Artist: Equatable {
+// Only used in the View layer
+class Artist {
     
-    var artistId: Int
     var artistName: String
     var tracks: [Track]
     
-    init(artistId: Int, artistName: String, tracks: [Track]) {
-        self.artistId = artistId
+    init(artistName: String, tracks: [Track]) {
         self.artistName = artistName
         self.tracks = tracks
     }
     
-    static func == (lhs: Artist, rhs: Artist) -> Bool {
-        return lhs.artistId == rhs.artistId
-    }
+//    static func == (lhs: Artist, rhs: Artist) -> Bool {
+//        return lhs.artistId == rhs.artistId
+//    }
 }

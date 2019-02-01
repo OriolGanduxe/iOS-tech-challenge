@@ -62,11 +62,11 @@ class TrackListViewController: UIViewController {
 extension TrackListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-        presenter.updateArtists(query: searchController.searchBar.text!, fetchRemote: false)
+        presenter.updateTracks(query: searchController.searchBar.text!, fetchRemote: false)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.updateArtists(query: searchBar.text!, fetchRemote: true)
+        presenter.updateTracks(query: searchBar.text!, fetchRemote: true)
     }
 }
 

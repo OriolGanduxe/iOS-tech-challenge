@@ -26,7 +26,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         wireFrame.presentTrackDetailModule(track: track)
     }
     
-    func updateArtists(query: String, fetchRemote: Bool) {
+    func updateTracks(query: String, fetchRemote: Bool) {
         
         guard query.count > 0 else {
             view.showEmpty()
@@ -38,15 +38,15 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         }
         
         // Interactor will fetch the data regardless the origin and will come back with the updates, using the same data contract
-        interactor.retrieveArtists(query: query, remote: fetchRemote) { [weak self] (result) in
+        interactor.retrieveTracks(query: query, remote: fetchRemote) { [weak self] (result) in
             guard let self = self else { return }
             
             self.view.loading(enabled: false)
             switch result {
-            case .success(let artists):
+            case .success(let tracks):
                 
-                if artists.count > 0 {
-                    let sortedArtists = self.sortArtistsAndTracks(artists: artists)
+                if tracks.count > 0 {
+                    let sortedArtists = self.prepareArtistsAndTracks(tracks: tracks)
                     self.view.showArtistTracks(artists: sortedArtists)
                 } else {
                     if fetchRemote {
@@ -62,10 +62,22 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         }
     }
 
-    // Regardless any way the data comes, we sort the artists and the tracks by name acending
-    private func sortArtistsAndTracks(artists: [Artist]) -> [Artist] {
+    // We wrap the tracks around with Artists, so it's simpler to show them in th view, the artists and tracks will be sorted ascending by name too
+    private func prepareArtistsAndTracks(tracks: [Track]) -> [Artist] {
         
-        let sortedArtists = artists.sorted { $0.artistName < $1.artistName }
+        var artistsByName = [String: Artist]()
+        
+        for track in tracks {
+            
+            if artistsByName[track.artistName] == nil {
+                let artist = Artist(artistName: track.artistName, tracks: [])
+                artistsByName[track.artistName] = artist
+            }
+            
+            artistsByName[track.artistName]?.tracks.append(track)
+        }
+        
+        let sortedArtists = Array(artistsByName.values).sorted { $0.artistName < $1.artistName }
         for artist in sortedArtists {
             artist.tracks.sort { $0.trackName < $1.trackName }
         }

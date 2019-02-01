@@ -88,10 +88,16 @@ class TrackDetailViewController: UIViewController {
 extension TrackDetailViewController: TrackDetailViewProtocol {
     
     func showTrack(track: Track) {
-
+        
         self.track = track
-        self.playerView = PlayerView()
-        self.playerView.prepare(with: URL(string: track.previewUrl)!)
+        
+        
+        if let previewUrl =  track.previewUrl {
+            self.playerView = PlayerView()
+            self.playerView.prepare(with: URL(string: previewUrl)!)
+        } else {
+            // TODO
+        }
         title = track.trackName
     }
 }

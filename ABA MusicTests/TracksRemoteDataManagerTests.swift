@@ -43,14 +43,15 @@ class TracksRemoteDataManagerTests: XCTestCase {
             return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
         }
         
-        remoteDataManager.fetchArtists(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
+            // TODO?
+        }
+
+        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
             
             switch results {
-            case .success(let artists):
-                XCTAssert(artists.count == 1)
-                if let artist = artists.first {
-                    XCTAssert(artist.tracks.count == 2)
-                }
+            case .success(let tracks):
+                XCTAssert(tracks.count == 2)
                 exp.fulfill()
                 
             case .failure(let error):
@@ -76,7 +77,11 @@ class TracksRemoteDataManagerTests: XCTestCase {
             return fixture(filePath: stubPath!, status: 200, headers: ["Content-Type":"application/json"])
         }
         
-        remoteDataManager.fetchArtists(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
+            // TODO ?
+        }
+        
+        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
             switch results {
             case .success(_):
                 XCTFail("Expecting error")
@@ -103,7 +108,11 @@ class TracksRemoteDataManagerTests: XCTestCase {
             return fixture(filePath: stubPath!, status: 400, headers: ["Content-Type":"application/json"])
         }
         
-        remoteDataManager.fetchArtists(query: "foo") { (results) in
+        remoteDataManager.fetchByArtistName(query: "foo") { (results) in
+            // TODO?
+        }
+        
+        remoteDataManager.fetchByTrackName(query: "foo") { (results) in
             switch results {
             case .success(_):
                 XCTFail("Expecting error")

@@ -19,7 +19,7 @@ extension TrackEntity {
     @NSManaged public var trackId: Int32
     @NSManaged public var artistName: String
     @NSManaged public var trackName: String
-    @NSManaged public var previewUrl: String
+    @NSManaged public var previewUrl: String?
     @NSManaged public var artworkUrl100: String
     @NSManaged public var primaryGenreName: String
     @NSManaged public var country: String

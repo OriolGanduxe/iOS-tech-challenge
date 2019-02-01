@@ -7,22 +7,19 @@
 //
 
 import Foundation
+import ObjectMapper
 
-// I considered using Alamofire ObjectMapper to map the result API request into this class, but because the tracks comes in
-// an array with a reference to Artist, and we want them grouped by artists instead of the other way around,
-// I left the current and simpler implementation. This way this init can also be used by the CoreData entities
-
-class Track: Equatable {
-    var trackId: Int
-    var artistName: String
-    var trackName: String
-    var previewUrl: String
-    var artworkUrl100: String
-    var primaryGenreName: String
-    var country: String
-    var releaseDate: Date
+struct Track: Equatable {
+    var trackId: Int!
+    var artistName: String!
+    var trackName: String!
+    var previewUrl: String?
+    var artworkUrl100: String!
+    var primaryGenreName: String!
+    var country: String!
+    var releaseDate: Date!
     
-    init(trackId: Int, artistName: String, trackName: String, previewUrl: String, artworkUrl100: String, primaryGenreName: String, country: String, releaseDate: Date) {
+    init(trackId: Int, artistName: String, trackName: String, previewUrl: String?, artworkUrl100: String, primaryGenreName: String, country: String, releaseDate: Date) {
         self.trackId = trackId
         self.artistName = artistName
         self.trackName = trackName
@@ -44,3 +41,24 @@ class Track: Equatable {
         return lhs.trackId == rhs.trackId
     }
 }
+
+extension Track: Mappable {
+    
+    init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map) {
+        trackId         <- map["trackId"]
+        trackName       <- map["trackName"]
+        artworkUrl100   <- map["artworkUrl100"]
+        artistName      <- map["artistName"]
+        previewUrl      <- map["previewUrl"]
+        primaryGenreName <- map["primaryGenreName"]
+        country         <- map["country"]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        releaseDate    <- (map["releaseDate"], DateFormatterTransform(dateFormatter: dateFormatter))
+    }
+}
+

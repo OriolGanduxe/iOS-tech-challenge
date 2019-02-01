@@ -12,8 +12,8 @@ import CoreData
 typealias StoreResults = (Result<Void>) -> Void
 
 protocol TracksPersistenceDataProvider: class {
-    func cachedArtists(query: String, completion: FetchArtistsResults)
-    func storeArtists(artists: [Artist], completion: @escaping  StoreResults)
+    func cachedTracks(query: String, completion: FetchTrackResults)
+    func storeTracks(tracks: [Track], completion: @escaping  StoreResults)
 }
 
 // This implementation of TracksPersistenceDataProvider uses CoreData and make some assumptions such as:
@@ -23,37 +23,38 @@ protocol TracksPersistenceDataProvider: class {
 // 4) Tracks are tied to artists, they come all together with the fetched artist
 class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     
-    func cachedArtists(query: String, completion: FetchArtistsResults) {
+    func cachedTracks(query: String, completion: FetchTrackResults) {
                 
-        let request: NSFetchRequest<ArtistEntity> = ArtistEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "artistName CONTAINS[c] %@", query)
+        let request: NSFetchRequest<TrackEntity> = TrackEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "trackName CONTAINS[c] %@ || artistName CONTAINS[c] %@", query, query)
         
         do {
-            let artists = try CoreDataStack.managedObjectContext.fetch(request)
-            let models = artists.map { $0.model }
+            let tracks = try CoreDataStack.managedObjectContext.fetch(request)
+            let models = tracks.map { $0.model }
             completion(.success(models))
         } catch let error {
             completion(.failure(error))
         }
     }
     
-    func storeArtists(artists: [Artist], completion: @escaping StoreResults) {
+    func storeTracks(tracks: [Track], completion: @escaping StoreResults) {
         
         DispatchQueue.global().async { [weak self] in
             
             guard let self = self else { return; }
             
             do {
-                let artistsIds = artists.map { $0.artistId }
-                let existingIds = try self.checkArtistIdExists(ids: artistsIds)
+                let trackIds: [Int] = tracks.map { $0.trackId }
                 
                 let context = CoreDataStack.newBackgroundContext()
-                for artist in artists {
+                let existingIds = try self.checkTrackIdExists(ids: trackIds, context: context)
+                
+                for track in tracks {
                     
-                    if !existingIds.contains(artist.artistId) {
+                    if !existingIds.contains(track.trackId) {
                         // Skipping existing artists
                         
-                        let _ = ArtistEntity(artist: artist, context: context)
+                        let _ = TrackEntity(track: track, context: context)
                     }
                 }
                 
@@ -70,14 +71,14 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
         }
     }
     
-    // Given a list of artistIds to check, it returns the subset of artistIDs that exists currently in database
-    // Checking the existence of all artists together for performance reasons
-    private func checkArtistIdExists(ids: [Int]) throws -> [Int] {
+    // Given a list of trackIds to check, it returns the subset of trackIds that exists currently in database
+    // Checking the existence of all tracks together for performance reasons
+    private func checkTrackIdExists(ids: [Int], context: NSManagedObjectContext) throws -> [Int] {
         
-        let request: NSFetchRequest<ArtistEntity> = ArtistEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "artistId IN %@", ids)
+        let request: NSFetchRequest<TrackEntity> = TrackEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "trackId IN %@", ids)
         
-        let artists = try CoreDataStack.managedObjectContext.fetch(request)
-        return artists.map { Int($0.artistId) }
+        let artists = try context.fetch(request)
+        return artists.map { Int($0.trackId) }
     }
 }

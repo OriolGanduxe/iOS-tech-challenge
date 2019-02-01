@@ -13,7 +13,7 @@ enum Result<T> {
     case failure(Error)
 }
 
-typealias FetchArtistsResults = (Result<[Artist]>) -> Void
+typealias FetchTrackResults = (Result<[Track]>) -> Void
 
 // Presenter talking to View
 protocol TrackListViewProtocol: class {
@@ -33,7 +33,7 @@ protocol TrackListPresenterProtocol: class {
     
     func viewSizeWillChange(to size: CGSize)
     func showTrackDetail(for track: Track)
-    func updateArtists(query: String, fetchRemote: Bool)
+    func updateTracks(query: String, fetchRemote: Bool)
 }
 
 // Presenter talking to Interactor
@@ -42,7 +42,7 @@ protocol TrackListInteractorProtocol: class {
     var remoteDataProvider: TracksRemoteDataProvider! { get set }
     var persistenceDataProvider: TracksPersistenceDataProvider! { get set }
     
-    func retrieveArtists(query: String, remote: Bool, completion: @escaping FetchArtistsResults)
+    func retrieveTracks(query: String, remote: Bool, completion: @escaping FetchTrackResults)
 }
 
 // Presenter talking to WireFrame

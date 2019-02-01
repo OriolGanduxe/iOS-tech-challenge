@@ -36,11 +36,11 @@ class TrackListPresenterTests: XCTestCase {
         }
     }
 
-    func testUpdateArtistsSuccess() {
+    func testupdateTracksSuccess() {
         
         let view = MockTrackListViewExpectArtists(testCase: self)
         presenter.view = view
-        presenter.updateArtists(query: "foo", fetchRemote: true)
+        presenter.updateTracks(query: "foo", fetchRemote: true)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -49,12 +49,12 @@ class TrackListPresenterTests: XCTestCase {
         }
     }
     
-    func testUpdateArtistsFailure() {
+    func testupdateTracksFailure() {
         
         mockInteractor.simulateFailure = true
         let view =  MockTrackListViewExpectError(testCase: self)
         presenter.view = view
-        presenter.updateArtists(query: "foo", fetchRemote: true)
+        presenter.updateTracks(query: "foo", fetchRemote: true)
         
         waitForExpectations(timeout: 1) { error in
             if let error = error {
@@ -72,7 +72,7 @@ class MockTrackListInteractor: TrackListInteractorProtocol {
     
     var simulateFailure = false
     
-    func retrieveArtists(query: String, remote: Bool, completion: @escaping FetchArtistsResults) {
+    func retrieveTracks(query: String, remote: Bool, completion: @escaping FetchTrackResults) {
         if simulateFailure {
             completion(.failure(remote ? MockErrors.simulatedRemoteError : MockErrors.simulatedPersistenceError))
         } else {
@@ -80,12 +80,8 @@ class MockTrackListInteractor: TrackListInteractorProtocol {
             let track2 = Track(trackId: 2, artistName: "artistZZ", trackName: "trackCC", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
             let track3 = Track(trackId: 3, artistName: "artistAA", trackName: "trackAA", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
             let track4 = Track(trackId: 4, artistName: "artistAA", trackName: "trackZZ", previewUrl: "fakeUrl", artworkUrl100: "fakeArtworkUrl", primaryGenreName: "genre2", country: "countryRoads", releaseDate: Date())
-
             
-            let artist1 = Artist(artistId: 1, artistName: "artistZZ", tracks: [track1, track2])
-            let artist2 = Artist(artistId: 2, artistName: "artistAA", tracks: [track3, track4])
-            
-            completion(.success([artist1, artist2]))
+            completion(.success([track1, track2, track3, track4]))
         }
     }
 }
