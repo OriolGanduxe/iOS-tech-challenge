@@ -19,7 +19,7 @@ class TracksRemoteDataManager: TracksRemoteDataProvider {
     
     func fetchArtists(query: String, completion: @escaping FetchArtistsResults) {
 
-        AlamoFireJSONClient.makeAPICall(to: TracksEndpoints.fetchArtists(term: query, limit: 200)) { (result) in
+        AlamoFireJSONClient.makeAPICall(to: TracksEndpoints.fetchTracks(term: query, limit: 200)) { (result) in
             
             switch result {
             case .success(let json):

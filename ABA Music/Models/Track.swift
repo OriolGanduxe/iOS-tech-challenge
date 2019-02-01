@@ -33,6 +33,13 @@ class Track: Equatable {
         self.releaseDate = releaseDate
     }
     
+    // TODO: Check it really works
+    var artworkUrl500: String {
+        get {
+            return artworkUrl100.replacingOccurrences(of: "100x100bb.jpg", with: "500x500bb.jpg")
+        }
+    }
+    
     static func == (lhs: Track, rhs: Track) -> Bool {
         return lhs.trackId == rhs.trackId
     }

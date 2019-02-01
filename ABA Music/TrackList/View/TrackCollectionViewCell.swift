@@ -15,7 +15,7 @@ class TrackCollectionViewCell: UICollectionViewCell {
         didSet {
             trackNameLabel.text = track.trackName
            
-            let imageURL = URL(string: track!.artworkUrl100)!
+            let imageURL = URL(string: track!.artworkUrl500)!
             let placeholderImage = UIImage(named: "track_placeholder")
             thumbnailImageView.af_setImage(withURL: imageURL, placeholderImage: placeholderImage)
             let gesture = UITapGestureRecognizer(target: self, action: #selector(pressTrack))
