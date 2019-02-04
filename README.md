@@ -1,20 +1,12 @@
 # Known issues / improvements
 
-CollectionView warnings.
-
-More unit testing required.
-
 DetailView doesn't display fullscreen video (as it used to), this was a design decision, but could be improved by adding a new screen.
 
-Better orientation and screen sizes support.
-
-Some mechanism to cleanup old cached data.
-
-Thumbnails are not looking great with just 100px, it's possible to request bigger images by modifing the URL.
+Mechanism to cleanup old cached data.
 
 No localisation.
 
-Using URLSession for simplicity, but Alamofire could be useful on a bigger scale project, with better testing as well.
+Usage of Reactive programming.
 
 # iOS Tech Challenge
 

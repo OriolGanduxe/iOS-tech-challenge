@@ -30,7 +30,9 @@ struct Track: Equatable {
         self.releaseDate = releaseDate
     }
     
-    // TODO: Check it really works
+    // I know this is not nice, but the API seems to support it,
+    // and the UI feels much better this way.
+    // On a real use case we would have proper images anyway.
     var artworkUrl500: String {
         get {
             return artworkUrl100.replacingOccurrences(of: "100x100bb.jpg", with: "500x500bb.jpg")

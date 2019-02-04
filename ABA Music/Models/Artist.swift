@@ -18,8 +18,4 @@ class Artist {
         self.artistName = artistName
         self.tracks = tracks
     }
-    
-//    static func == (lhs: Artist, rhs: Artist) -> Bool {
-//        return lhs.artistId == rhs.artistId
-//    }
 }

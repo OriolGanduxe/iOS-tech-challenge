@@ -138,10 +138,6 @@ class MockTracksRemoteDataManager: TracksRemoteDataProvider {
             completion(.success([track1, track2]))
         }
     }
-    
-    func fetchByArtistName(query: String, completion: @escaping FetchTrackResults) {
-        // TODO
-    }
 }
 
 class MockTracksPersistenceDataManager: TracksPersistenceDataProvider {

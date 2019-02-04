@@ -30,7 +30,6 @@
 		4CF5114E22044AA10023A0AB /* TracksRemoteDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5114D22044AA10023A0AB /* TracksRemoteDataManagerTests.swift */; };
 		4CF5115222044AC00023A0AB /* sampleCorrectRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CF5115022044AC00023A0AB /* sampleCorrectRequest.json */; };
 		4CF5115322044AC00023A0AB /* sampleWrongRequest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CF5115122044AC00023A0AB /* sampleWrongRequest.json */; };
-		4CF5115722044C300023A0AB /* AlamoFireJSONClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5115622044C300023A0AB /* AlamoFireJSONClient.swift */; };
 		4CF5115922044EC70023A0AB /* TracksEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5115822044EC70023A0AB /* TracksEndpoints.swift */; };
 		4CF5115B220454150023A0AB /* AlamofireEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5115A220454150023A0AB /* AlamofireEndpoint.swift */; };
 		4CF5115E2204601A0023A0AB /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5115D2204601A0023A0AB /* Artist.swift */; };
@@ -89,7 +88,6 @@
 		4CF5114D22044AA10023A0AB /* TracksRemoteDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksRemoteDataManagerTests.swift; sourceTree = "<group>"; };
 		4CF5115022044AC00023A0AB /* sampleCorrectRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleCorrectRequest.json; sourceTree = "<group>"; };
 		4CF5115122044AC00023A0AB /* sampleWrongRequest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleWrongRequest.json; sourceTree = "<group>"; };
-		4CF5115622044C300023A0AB /* AlamoFireJSONClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamoFireJSONClient.swift; sourceTree = "<group>"; };
 		4CF5115822044EC70023A0AB /* TracksEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksEndpoints.swift; sourceTree = "<group>"; };
 		4CF5115A220454150023A0AB /* AlamofireEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireEndpoint.swift; sourceTree = "<group>"; };
 		4CF5115D2204601A0023A0AB /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 		4CF5115C2204542D0023A0AB /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				4CF5115622044C300023A0AB /* AlamoFireJSONClient.swift */,
 				4CF5115A220454150023A0AB /* AlamofireEndpoint.swift */,
 				4CF5115822044EC70023A0AB /* TracksEndpoints.swift */,
 			);
@@ -600,7 +597,6 @@
 				4CF5115922044EC70023A0AB /* TracksEndpoints.swift in Sources */,
 				4C4CC67D21F8B18800BBCFCC /* TrackEntity+CoreDataClass.swift in Sources */,
 				4C4CC69421FB77FF00BBCFCC /* TrackDetailProtocols.swift in Sources */,
-				4CF5115722044C300023A0AB /* AlamoFireJSONClient.swift in Sources */,
 				4C4CC68221F9B6E100BBCFCC /* TracksPersistenceDataManager.swift in Sources */,
 				4C4CC68D21FA2CF600BBCFCC /* Storyboard+extension.swift in Sources */,
 				4CF5115E2204601A0023A0AB /* Artist.swift in Sources */,

@@ -17,10 +17,10 @@ protocol TracksPersistenceDataProvider: class {
 }
 
 // This implementation of TracksPersistenceDataProvider uses CoreData and make some assumptions such as:
-// 1) There's no clean up method, so tracks and artists are never deleted unless you wipe the app. This could be improved if needed.
-// 2) CacheArtists method fetches by artist name and is case insensitive
-// 3) If we are storing an artist that already exist (same artistId) it ignores it, so it's not possible to update artists
-// 4) Tracks are tied to artists, they come all together with the fetched artist
+// 1) There's no clean up method, so tracks are never deleted unless you wipe the app. This could be improved if needed.
+// 2) cachedTracks method fetches by both artist name and track name and is case insensitive
+// 3) If we are storing a track that already exist (same trackId) it ignores it, so it's not possible to update them
+// 4) Storage is done in background thread because we don't block the UI while that happens, but the retrieval is done in the main thread, as it tends to be slightly faster. If this was affecting the performance it could easly be moved also into another thread, as the Interactor is not coupled to the  CD entities
 class TracksPersistenceDataManager: TracksPersistenceDataProvider {
     
     func cachedTracks(query: String, completion: FetchTrackResults) {
@@ -53,7 +53,6 @@ class TracksPersistenceDataManager: TracksPersistenceDataProvider {
                     
                     if !existingIds.contains(track.trackId) {
                         // Skipping existing artists
-                        
                         let _ = TrackEntity(track: track, context: context)
                     }
                 }

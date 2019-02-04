@@ -20,20 +20,6 @@ class TracksRemoteDataManagerTests: XCTestCase {
         remoteDataManager = TracksRemoteDataManager()
     }
     
-    // TODO: Necessary? It still mocks :/
-    let mockManager: SessionManager = {
-        let configuration = URLSession.shared.configuration
-        
-        OHHTTPStubs.setEnabled(true, for: configuration)
-        
-        configuration.urlCache = nil
-        
-        let delegate = Alamofire.SessionDelegate()
-        let session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
-        
-        return SessionManager(session: session, delegate: delegate)!
-    }()
-    
     func testAlamofireSuccessRequest() {
         
         let exp = expectation(description: "Wait for response")

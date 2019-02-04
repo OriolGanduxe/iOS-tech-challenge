@@ -14,9 +14,9 @@ protocol TracksRemoteDataProvider: class {
     func fetchByArtistAndTrackName(query: String, completion: @escaping FetchTrackResults)
 }
 
-// This concrete implementation of TracksRemoteDataProvider uses simple URLSession (as it was in the original implementation of the test)
-// I considered using Alamofire, but the way we use the models doesn't help us using ObjectMapper to easily map them.
 // We don't do any error handling other than reporting the errors and showing a simple generic label in the view, so there's no need to add more complexity.
+
+// Because the requirement was being able to fetch by artist and track name together, we are firing two requests in paralel, as the API only supports fetching by one attribute at a time.
 class TracksRemoteDataManager: TracksRemoteDataProvider {
     
     func fetchByArtistAndTrackName(query: String, completion: @escaping FetchTrackResults) {
